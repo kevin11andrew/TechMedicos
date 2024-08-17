@@ -8,5 +8,5 @@ public interface DoctorService {
     void addSchedule(int doctorId,List<Schedule> schedule);
     List<Appointment> viewAppointments(int DoctorId);
     void cancelAppointment(int appointmentId);
-    void suggestTreatment(int appointmentId,String treatment);
+//    void suggestTreatment(int appointmentId,String treatment);
 }
