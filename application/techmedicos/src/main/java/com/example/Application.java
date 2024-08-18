@@ -12,13 +12,19 @@ import static com.example.database.MySqlConnectionFactory.getConnection;
 
 public class Application {
     public static void main(String[] args) {
-        MySqlConnectionFactory mySqlConnectionFactory = new MySqlConnectionFactory();
-        try {
-            Connection connection = getConnection();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+//        MySqlConnectionFactory mySqlConnectionFactory = new MySqlConnectionFactory();
+//        try {
+//            Connection connection = getConnection();
+//        } catch (SQLException e) {
+//            throw new RuntimeException(e);
+//        }
 
+
+        MedicalRepository medicalRepository = new MySqlMedicalRepository();
+//        medicalRepository.getDoctors();
+//        medicalRepository.getUsers();
+//        medicalRepository.getPatients();
+        medicalRepository.getNextId();
         //
     }
 }

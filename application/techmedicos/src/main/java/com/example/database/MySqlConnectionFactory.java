@@ -27,10 +27,10 @@ public class MySqlConnectionFactory {
             PreparedStatement statement;
             ArrayList<String> sql = new ArrayList<>();
 
-            sql.add("CREATE TABLE IF NOT EXISTS users (user_id INT(8) PRIMARY KEY, name VARCHAR(20), password VARCHAR(16), contactNo INT(10));");
-            sql.add("CREATE TABLE IF NOT EXISTS doctors (doctor_id INT(8) PRIMARY KEY, name VARCHAR(20), password VARCHAR(16), contactNo INT(10), speaciality varchar(20));");
+            sql.add("CREATE TABLE IF NOT EXISTS users (user_id INT(8) PRIMARY KEY, name VARCHAR(20), password VARCHAR(16), contact_no BIGINT(10));");
+            sql.add("CREATE TABLE IF NOT EXISTS doctors (doctor_id INT(8) PRIMARY KEY, name VARCHAR(20), password VARCHAR(16), contact_no BIGINT(10), speciality varchar(20));");
             sql.add("CREATE TABLE IF NOT EXISTS admin (admin_id INT(8) PRIMARY KEY, password VARCHAR(16));");
-            sql.add("CREATE TABLE IF NOT EXISTS patients (patient_id INT(8) PRIMARY KEY, name VARCHAR(20), age INT, contactNo INT(10), user_id INT(8), " +
+            sql.add("CREATE TABLE IF NOT EXISTS patients (patient_id INT(8) PRIMARY KEY, name VARCHAR(20), age INT, contact_no BIGINT(10), user_id INT(8), " +
                     "FOREIGN KEY (user_id) REFERENCES users(user_id)" +
                     ");"); //user_id is set to null if user(i.e. hospital staff) is deleted
             sql.add("CREATE TABLE IF NOT EXISTS schedule (schedule_id INT(8) PRIMARY KEY, date DATE, timeslot INT, doctor_id INT(8), " +

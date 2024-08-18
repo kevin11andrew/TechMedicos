@@ -2,13 +2,14 @@ package com.example.models;
 
 public class Doctor {
     private int doctorId;
-    private Speciality speciality;
+//    private Speciality speciality; let's add this in version 2
+    private String speciality;
     private String name;
-    private String contactNo;
+    private long contactNo;
     private String password;
 
     // Constructor
-    public Doctor(int doctorId, Speciality speciality, String name, String contactNo, String password) {
+    public Doctor(int doctorId, String speciality, String name, long contactNo, String password) {
         this.doctorId = doctorId;
         this.speciality = speciality;
         this.name = name;
@@ -25,11 +26,11 @@ public class Doctor {
         this.doctorId = doctorId;
     }
 
-    public Speciality getSpeciality() {
+    public String getSpeciality() {
         return speciality;
     }
 
-    public void setSpeciality(Speciality speciality) {
+    public void setSpeciality(String speciality) {
         this.speciality = speciality;
     }
 
@@ -41,11 +42,11 @@ public class Doctor {
         this.name = name;
     }
 
-    public String getContactNo() {
+    public long getContactNo() {
         return contactNo;
     }
 
-    public void setContactNo(String contactNo) {
+    public void setContactNo(long contactNo) {
         this.contactNo = contactNo;
     }
 
