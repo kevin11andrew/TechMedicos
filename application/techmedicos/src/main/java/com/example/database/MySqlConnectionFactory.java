@@ -26,6 +26,7 @@ public class MySqlConnectionFactory {
             connection=getConnection();
             PreparedStatement statement;
             ArrayList<String> sql = new ArrayList<>();
+
             sql.add("CREATE TABLE IF NOT EXISTS users (user_id INT(8) PRIMARY KEY, name VARCHAR(20), password VARCHAR(16), contactNo INT(10));");
             sql.add("CREATE TABLE IF NOT EXISTS doctors (doctor_id INT(8) PRIMARY KEY, name VARCHAR(20), password VARCHAR(16), contactNo INT(10), speaciality varchar(20));");
             sql.add("CREATE TABLE IF NOT EXISTS admin (admin_id INT(8) PRIMARY KEY, password VARCHAR(16));");

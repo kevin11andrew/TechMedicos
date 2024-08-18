@@ -6,7 +6,8 @@ public class Appointment {
     private int patientId;
     private int userId;
     private int scheduleId;
-    private AppointmentStatus status;
+//    not viable at this stage:
+//    private AppointmentStatus status;
     private String summary;
     private String report;
 
@@ -17,7 +18,7 @@ public class Appointment {
         this.patientId = patientId;
         this.userId = userId;
         this.scheduleId = scheduleId;
-        this.status = status;
+//        this.status = status;
         this.summary = summary;
         this.report = report;
     }
@@ -63,13 +64,13 @@ public class Appointment {
         this.scheduleId = scheduleId;
     }
 
-    public AppointmentStatus getStatus() {
-        return status;
-    }
-
-    public void setStatus(AppointmentStatus status) {
-        this.status = status;
-    }
+//    public AppointmentStatus getStatus() {
+//        return status;
+//    }
+//
+//    public void setStatus(AppointmentStatus status) {
+//        this.status = status;
+//    }
 
     public String getSummary() {
         return summary;
@@ -95,7 +96,7 @@ public class Appointment {
                 ", patientId=" + patientId +
                 ", userId=" + userId +
                 ", scheduleId=" + scheduleId +
-                ", status=" + status +
+//                ", status=" + status +
                 ", summary='" + summary + '\'' +
                 ", report='" + report + '\'' +
                 '}';
