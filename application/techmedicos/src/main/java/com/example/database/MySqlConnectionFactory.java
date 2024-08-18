@@ -7,6 +7,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Properties;
 
 public class MySqlConnectionFactory {
@@ -23,14 +24,22 @@ public class MySqlConnectionFactory {
         }
         try {
             connection=getConnection();
+            PreparedStatement statement;
+            ArrayList<String> sql = new ArrayList<>();
+            sql.add("CREATE TABLE IF NOT EXISTS users (user_id INT(8) PRIMARY KEY, name VARCHAR(20), password VARCHAR(16), contactNo INT(10));");
+            sql.add("CREATE TABLE IF NOT EXISTS doctors (doctor_id INT(8) PRIMARY KEY, name VARCHAR(20), password VARCHAR(16), contactNo INT(10), speaciality varchar(20));");
+            sql.add("CREATE TABLE IF NOT EXISTS admin (admin_id INT(8) PRIMARY KEY, password VARCHAR(16));");
+            sql.add("CREATE TABLE IF NOT EXISTS patients (patient_id INT(8) PRIMARY KEY, name VARCHAR(20), age INT, contactNo INT(10), user_id INT(8), " +
+                    "FOREIGN KEY (user_id) REFERENCES users(user_id));"); //user_id is set to null if user(i.e. hospital staff) is deleted
+//            sql.add("CREATE TABLE IF NOT EXISTS schedule (schedule_id INT(8) PRIMARY KEY, date DATE, timeslot int,)")
 
-            String sql = "CREATE TABLE IF NOT EXISTS user3 (user_id int(8) primary key, name varchar(20), password varchar(16));";
-            PreparedStatement statement=connection.prepareStatement(sql);
-            int n = statement.executeUpdate();
+            for(String query: sql){
+                statement=connection.prepareStatement(query);
+                statement.executeUpdate();
+            }
 
 
 
-            System.out.println(n);
         } catch (SQLException e) {
             e.printStackTrace();
         }finally {
