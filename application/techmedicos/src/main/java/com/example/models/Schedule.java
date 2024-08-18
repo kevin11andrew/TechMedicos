@@ -6,10 +6,10 @@ public class Schedule {
     private int doctorId;
     private int scheduleId;
     private LocalDate date;
-    private String timeSlot;
+    private int timeSlot;
 
     // Constructor
-    public Schedule(int doctorId, int scheduleId, LocalDate date, String timeSlot) {
+    public Schedule(int doctorId, int scheduleId, LocalDate date, int timeSlot) {
         this.doctorId = doctorId;
         this.scheduleId = scheduleId;
         this.date = date;
@@ -41,11 +41,11 @@ public class Schedule {
         this.date = date;
     }
 
-    public String getTimeSlot() {
+    public int getTimeSlot() {
         return timeSlot;
     }
 
-    public void setTimeSlot(String timeSlot) {
+    public void setTimeSlot(int timeSlot) {
         this.timeSlot = timeSlot;
     }
 
