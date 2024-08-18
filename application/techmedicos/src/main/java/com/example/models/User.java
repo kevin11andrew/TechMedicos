@@ -1,13 +1,13 @@
 package com.example.models;
 
 public class User {
-    private String contactNo;
+    private long contactNo;
     private int userId;
     private String name;
     private String password;
 
     // Constructor
-    public User(int userId, String name, String contactNo, String password) {
+    public User(int userId, String name, long contactNo, String password) {
         this.userId = userId;
         this.name = name;
         this.contactNo = contactNo;
@@ -15,11 +15,11 @@ public class User {
     }
 
     // Getters and Setters
-    public String getContactNo() {
+    public long getContactNo() {
         return contactNo;
     }
 
-    public void setContactNo(String contactNo) {
+    public void setContactNo(long contactNo) {
         this.contactNo = contactNo;
     }
 

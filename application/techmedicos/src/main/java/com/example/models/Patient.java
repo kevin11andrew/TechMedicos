@@ -5,10 +5,10 @@ public class Patient {
     private int patientId;
     private String name;
     private int age;
-    private String contactNo;
+    private long contactNo;
 
     // Constructor
-    public Patient(int userId, int patientId, String name, int age, String contactNo) {
+    public Patient(int userId, int patientId, String name, int age, long contactNo) {
         this.userId = userId;
         this.patientId = patientId;
         this.name = name;
@@ -49,11 +49,11 @@ public class Patient {
         this.age = age;
     }
 
-    public String getContactNo() {
+    public long getContactNo() {
         return contactNo;
     }
 
-    public void setContactNo(String contactNo) {
+    public void setContactNo(long contactNo) {
         this.contactNo = contactNo;
     }
 
