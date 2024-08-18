@@ -1,61 +1,70 @@
 package com.example.models;
 
-import java.util.ArrayList;
-import java.util.List;
-
-public class Doctor extends User {
-    private String specialization;
-    private List<Schedule> schedules;
+public class Doctor {
+    private int doctorId;
+    private Speciality speciality;
+    private String name;
+    private String contactNo;
+    private String password;
 
     // Constructor
-    public Doctor(int userId, String username, String password, String specialization) {
-        super(userId, username, password, "DOCTOR");
-        this.specialization = specialization;
-        this.schedules = new ArrayList<>();
-    }
-
-    @Override
-    public void login() {
-        System.out.println("Doctor " + getUsername() + " logged in successfully.");
-    }
-
-    // Doctor features
-    public void setupSchedule(Schedule schedule) {
-        schedules.add(schedule);
-        System.out.println("Schedule added for Doctor: " + getUsername());
-    }
-
-    public void viewAppointments(List<Appointment> appointments) {
-        System.out.println("Appointments for Doctor: " + getUsername());
-        for (Appointment appointment : appointments) {
-            if (appointment.getDoctor().equals(this)) {
-                System.out.println(appointment);
-            }
-        }
-    }
-
-    public void suggestMedicalTest(Patient patient, String test) {
-        System.out.println("Suggested Test for Patient: " + patient.getName() + " - " + test);
-    }
-
-    public void suggestMedicines(Patient patient, String medicine) {
-        System.out.println("Suggested Medicine for Patient: " + patient.getName() + " - " + medicine);
+    public Doctor(int doctorId, Speciality speciality, String name, String contactNo, String password) {
+        this.doctorId = doctorId;
+        this.speciality = speciality;
+        this.name = name;
+        this.contactNo = contactNo;
+        this.password = password;
     }
 
     // Getters and Setters
-    public String getSpecialization() {
-        return specialization;
+    public int getDoctorId() {
+        return doctorId;
     }
 
-    public void setSpecialization(String specialization) {
-        this.specialization = specialization;
+    public void setDoctorId(int doctorId) {
+        this.doctorId = doctorId;
     }
 
-    public List<Schedule> getSchedules() {
-        return schedules;
+    public Speciality getSpeciality() {
+        return speciality;
     }
 
-    public void setSchedules(List<Schedule> schedules) {
-        this.schedules = schedules;
+    public void setSpeciality(Speciality speciality) {
+        this.speciality = speciality;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getContactNo() {
+        return contactNo;
+    }
+
+    public void setContactNo(String contactNo) {
+        this.contactNo = contactNo;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    @Override
+    public String toString() {
+        return "Doctor{" +
+                "doctorId=" + doctorId +
+                ", speciality=" + speciality +
+                ", name='" + name + '\'' +
+                ", contactNo='" + contactNo + '\'' +
+                ", password='" + password + '\'' +
+                '}';
     }
 }

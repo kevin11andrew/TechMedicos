@@ -2,18 +2,24 @@ package com.example.models;
 
 public class Appointment {
     private int appointmentId;
-    private Patient patient;
-    private Doctor doctor;
-    private Schedule schedule;
-    private String status; // "BOOKED", "CANCELLED", "PENDING"
+    private int doctorId;
+    private int patientId;
+    private int userId;
+    private int scheduleId;
+    private AppointmentStatus status;
+    private String summary;
+    private String report;
 
     // Constructor
-    public Appointment(int appointmentId, Patient patient, Doctor doctor, Schedule schedule, String status) {
+    public Appointment(int appointmentId, int doctorId, int patientId, int userId, int scheduleId, AppointmentStatus status, String summary, String report) {
         this.appointmentId = appointmentId;
-        this.patient = patient;
-        this.doctor = doctor;
-        this.schedule = schedule;
+        this.doctorId = doctorId;
+        this.patientId = patientId;
+        this.userId = userId;
+        this.scheduleId = scheduleId;
         this.status = status;
+        this.summary = summary;
+        this.report = report;
     }
 
     // Getters and Setters
@@ -25,42 +31,73 @@ public class Appointment {
         this.appointmentId = appointmentId;
     }
 
-    public Patient getPatient() {
-        return patient;
+    public int getDoctorId() {
+        return doctorId;
     }
 
-    public void setPatient(Patient patient) {
-        this.patient = patient;
+    public void setDoctorId(int doctorId) {
+        this.doctorId = doctorId;
     }
 
-    public Doctor getDoctor() {
-        return doctor;
+    public int getPatientId() {
+        return patientId;
     }
 
-    public void setDoctor(Doctor doctor) {
-        this.doctor = doctor;
+    public void setPatientId(int patientId) {
+        this.patientId = patientId;
     }
 
-    public Schedule getSchedule() {
-        return schedule;
+    public int getUserId() {
+        return userId;
     }
 
-    public void setSchedule(Schedule schedule) {
-        this.schedule = schedule;
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
-    public String getStatus() {
+    public int getScheduleId() {
+        return scheduleId;
+    }
+
+    public void setScheduleId(int scheduleId) {
+        this.scheduleId = scheduleId;
+    }
+
+    public AppointmentStatus getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(AppointmentStatus status) {
         this.status = status;
+    }
+
+    public String getSummary() {
+        return summary;
+    }
+
+    public void setSummary(String summary) {
+        this.summary = summary;
+    }
+
+    public String getReport() {
+        return report;
+    }
+
+    public void setReport(String report) {
+        this.report = report;
     }
 
     @Override
     public String toString() {
-        return "Appointment [appointmentId=" + appointmentId + ", patient=" + patient.getName() +
-                ", doctor=" + doctor.getUsername() + ", schedule=" + schedule.getDateTime() +
-                ", status=" + status + "]";
+        return "Appointment{" +
+                "appointmentId=" + appointmentId +
+                ", doctorId=" + doctorId +
+                ", patientId=" + patientId +
+                ", userId=" + userId +
+                ", scheduleId=" + scheduleId +
+                ", status=" + status +
+                ", summary='" + summary + '\'' +
+                ", report='" + report + '\'' +
+                '}';
     }
 }

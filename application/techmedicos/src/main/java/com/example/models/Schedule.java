@@ -1,20 +1,30 @@
 package com.example.models;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 public class Schedule {
+    private int doctorId;
     private int scheduleId;
-    private LocalDateTime dateTime;
-    private boolean isAvailable;
+    private LocalDate date;
+    private String timeSlot;
 
     // Constructor
-    public Schedule(int scheduleId, LocalDateTime dateTime, boolean isAvailable) {
+    public Schedule(int doctorId, int scheduleId, LocalDate date, String timeSlot) {
+        this.doctorId = doctorId;
         this.scheduleId = scheduleId;
-        this.dateTime = dateTime;
-        this.isAvailable = isAvailable;
+        this.date = date;
+        this.timeSlot = timeSlot;
     }
 
     // Getters and Setters
+    public int getDoctorId() {
+        return doctorId;
+    }
+
+    public void setDoctorId(int doctorId) {
+        this.doctorId = doctorId;
+    }
+
     public int getScheduleId() {
         return scheduleId;
     }
@@ -23,28 +33,29 @@ public class Schedule {
         this.scheduleId = scheduleId;
     }
 
-    public LocalDateTime getDateTime() {
-        return dateTime;
+    public LocalDate getDate() {
+        return date;
     }
 
-    public void setDateTime(LocalDateTime dateTime) {
-        this.dateTime = dateTime;
+    public void setDate(LocalDate date) {
+        this.date = date;
     }
 
-    public boolean isAvailable() {
-        return isAvailable;
+    public String getTimeSlot() {
+        return timeSlot;
     }
 
-    public void setAvailable(boolean isAvailable) {
-        this.isAvailable = isAvailable;
+    public void setTimeSlot(String timeSlot) {
+        this.timeSlot = timeSlot;
     }
 
     @Override
     public String toString() {
         return "Schedule{" +
-                "scheduleId=" + scheduleId +
-                ", dateTime=" + dateTime +
-                ", isAvailable=" + isAvailable +
+                "doctorId=" + doctorId +
+                ", scheduleId=" + scheduleId +
+                ", date=" + date +
+                ", timeSlot='" + timeSlot + '\'' +
                 '}';
     }
 }

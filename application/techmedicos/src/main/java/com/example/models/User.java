@@ -1,23 +1,28 @@
 package com.example.models;
 
-public abstract class User {
+public class User {
+    private String contactNo;
     private int userId;
-    private String username;
+    private String name;
     private String password;
-    private String role; // "ADMIN", "DOCTOR", "USER"
 
     // Constructor
-    public User(int userId, String username, String password, String role) {
+    public User(int userId, String name, String contactNo, String password) {
         this.userId = userId;
-        this.username = username;
+        this.name = name;
+        this.contactNo = contactNo;
         this.password = password;
-        this.role = role;
     }
 
-    // Abstract method for login
-    public abstract void login();
-
     // Getters and Setters
+    public String getContactNo() {
+        return contactNo;
+    }
+
+    public void setContactNo(String contactNo) {
+        this.contactNo = contactNo;
+    }
+
     public int getUserId() {
         return userId;
     }
@@ -26,12 +31,12 @@ public abstract class User {
         this.userId = userId;
     }
 
-    public String getUsername() {
-        return username;
+    public String getName() {
+        return name;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getPassword() {
@@ -42,22 +47,13 @@ public abstract class User {
         this.password = password;
     }
 
-    public String getRole() {
-        return role;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
-    }
-
-
     @Override
     public String toString() {
         return "User{" +
-                "userId=" + userId +
-                ", username='" + username + '\'' +
+                "contactNo='" + contactNo + '\'' +
+                ", userId=" + userId +
+                ", name='" + name + '\'' +
                 ", password='" + password + '\'' +
-                ", role='" + role + '\'' +
                 '}';
     }
 }

@@ -1,24 +1,30 @@
 package com.example.models;
 
 public class Patient {
+    private int userId;
     private int patientId;
     private String name;
     private int age;
-    private String gender;
-    private String contactNumber;
-    private String address;
+    private String contactNo;
 
     // Constructor
-    public Patient(int patientId, String name, int age, String gender, String contactNumber, String address) {
+    public Patient(int userId, int patientId, String name, int age, String contactNo) {
+        this.userId = userId;
         this.patientId = patientId;
         this.name = name;
         this.age = age;
-        this.gender = gender;
-        this.contactNumber = contactNumber;
-        this.address = address;
+        this.contactNo = contactNo;
     }
 
     // Getters and Setters
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
+
     public int getPatientId() {
         return patientId;
     }
@@ -43,39 +49,22 @@ public class Patient {
         this.age = age;
     }
 
-    public String getGender() {
-        return gender;
+    public String getContactNo() {
+        return contactNo;
     }
 
-    public void setGender(String gender) {
-        this.gender = gender;
-    }
-
-    public String getContactNumber() {
-        return contactNumber;
-    }
-
-    public void setContactNumber(String contactNumber) {
-        this.contactNumber = contactNumber;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
+    public void setContactNo(String contactNo) {
+        this.contactNo = contactNo;
     }
 
     @Override
     public String toString() {
         return "Patient{" +
-                "patientId=" + patientId +
+                "userId=" + userId +
+                ", patientId=" + patientId +
                 ", name='" + name + '\'' +
                 ", age=" + age +
-                ", gender='" + gender + '\'' +
-                ", contactNumber='" + contactNumber + '\'' +
-                ", address='" + address + '\'' +
+                ", contactNo='" + contactNo + '\'' +
                 '}';
     }
 }
