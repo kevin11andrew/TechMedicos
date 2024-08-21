@@ -24,7 +24,7 @@ public class DoctorServiceImpl implements DoctorService{
     }
 
     @Override
-    public List<Appointment> viewAppointments(Long doctorId) throws ServiceException {
+    public List<Appointment> viewAppointments(int doctorId) throws ServiceException {
         try {
             return medicalRepositoryFactory.findByDoctorId(doctorId);
         } catch (Exception e) {
@@ -33,7 +33,7 @@ public class DoctorServiceImpl implements DoctorService{
     }
 
     @Override
-    public void cancelAppointment(Long appointmentId) throws ServiceException {
+    public void cancelAppointment(int appointmentId) throws ServiceException {
         try {
             medicalRepositoryFactory.delete(appointmentId);
         } catch (Exception e) {
@@ -42,7 +42,7 @@ public class DoctorServiceImpl implements DoctorService{
     }
 
     @Override
-    public Patient viewPatientReport(Long patientId) throws ServiceException {
+    public Patient viewPatientReport(int patientId) throws ServiceException {
         try {
             return medicalRepositoryFactory.getReportById(patientId);
         } catch (Exception e) {
