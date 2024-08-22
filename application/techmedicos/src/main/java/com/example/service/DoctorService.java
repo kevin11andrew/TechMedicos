@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface DoctorService {
     void addSchedule(Schedule schedule) throws ServiceException;
-    List<Appointment> viewAppointments(Long doctorId) throws ServiceException;
-    void cancelAppointment(Long appointmentId) throws ServiceException;
-    Patient viewPatientReport(Long patientId) throws ServiceException;
+    List<Appointment> viewAppointments(int doctorId) throws ServiceException;
+    void cancelAppointment(int appointmentId) throws ServiceException;
+    Patient viewPatientReport(int patientId) throws ServiceException;
 }

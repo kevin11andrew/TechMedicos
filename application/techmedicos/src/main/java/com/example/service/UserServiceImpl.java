@@ -25,7 +25,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<Appointment> viewPatientAppointments(Long patientId) throws ServiceException {
+    public List<Appointment> viewPatientAppointments(int patientId) throws ServiceException {
         try {
             return medicalRepositoryFactory.findByPatientId(patientId);
         } catch (Exception e) {
