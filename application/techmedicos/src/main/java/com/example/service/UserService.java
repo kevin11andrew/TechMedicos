@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface UserService {
     void registerPatient(Patient patient) throws ServiceException;
-    List<Appointment> viewPatientAppointments(Long patientId) throws ServiceException;
+    List<Appointment> viewPatientAppointments(int patientId) throws ServiceException;
     void bookAppointment(Appointment appointment) throws ServiceException;
     List<Doctor> viewAvailableDoctors() throws ServiceException; //
 }
