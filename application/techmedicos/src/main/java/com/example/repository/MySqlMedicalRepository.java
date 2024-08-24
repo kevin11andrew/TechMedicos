@@ -157,4 +157,39 @@ public class MySqlMedicalRepository implements MedicalRepository {
         }
     }
 
+    @Override
+    public Employee employeeValidation(int id, String password) {
+        String []sql= {"SELECT password FROM doctors where doctor_id= ?;",
+                "SELECT password FROM users where user_id= ?;",
+                "SELECT password FROM admin where admin_id= ?;"};
+
+        try {
+            connection = MySqlConnectionFactory.getConnection();
+            PreparedStatement statement;
+            for (int i=0;i<sql.length;i++) {
+                statement = connection.prepareStatement(sql[i]);
+                statement.setInt(1,id);
+                ResultSet resultSet = statement.executeQuery();
+                while (resultSet.next()) {
+                    if(resultSet.getString(1).equals(password)){
+                        switch (i){
+                            case 0: return Employee.DOCTOR;
+                            case 1: return Employee.USER;
+                            case 2: return Employee.ADMIN;
+                        }
+                    }
+                }
+            }
+            return null;
+        }catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            try {
+                connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
 }
