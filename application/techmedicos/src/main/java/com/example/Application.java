@@ -24,7 +24,7 @@ public class Application {
 //        medicalRepository.getDoctors();
 //        medicalRepository.getUsers();
 //        medicalRepository.getPatients();
-        medicalRepository.getNextId();
+//        medicalRepository.getNextId();
         //
     }
 }
