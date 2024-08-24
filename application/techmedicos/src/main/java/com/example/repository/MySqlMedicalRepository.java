@@ -14,6 +14,13 @@ import java.util.Collections;
 public class MySqlMedicalRepository implements MedicalRepository {
     Connection connection=null;
 
+    static{
+        try {
+            Class.forName("com.example.database.MySqlConnectionFactory");
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e); // Class not found
+        }
+    }
     @Override
     public ArrayList<Admin> getAdmins() {
         ArrayList<Admin> admins = new ArrayList<>();
