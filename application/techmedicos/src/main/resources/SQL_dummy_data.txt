@@ -1,6 +1,6 @@
 INSERTING DUMMY DATA INTO USERS TABLE:
 
-INSERT INTO users (user_id, name, password, contactNo) VALUES
+INSERT INTO users (user_id, name, password, contact_no) VALUES
 (10000001, 'JohnDoe', 'password1', 1234567890),
 (10000002, 'JaneSmith', 'password2', 2345678901),
 (10000003, 'MikeBrown', 'password3', 3456789012),
@@ -11,7 +11,7 @@ INSERT INTO users (user_id, name, password, contactNo) VALUES
 ---------------------------------------------------------------------------
 INSERTING DUMMY DATA INTO DOCTORS TABLE:
 
-INSERT INTO doctors (doctor_id, name, password, contactNo, speciality) VALUES
+INSERT INTO doctors (doctor_id, name, password, contact_no, speciality) VALUES
 (20000001, 'AliceCarter', 'docpass1', 9876543210, 'Cardiology'),
 (20000002, 'BobJones', 'docpass2', 8765432109, 'Neurology'),
 (20000003, 'CharlieMiller', 'docpass3', 7654321098, 'Orthopedics'),
@@ -23,17 +23,11 @@ INSERT INTO doctors (doctor_id, name, password, contactNo, speciality) VALUES
 INSERTING DUMMY DATA INTO ADMINS TABLE:
 
 INSERT INTO admin (admin_id, password) VALUES
-(30000001, 'adminpass1'),
-(30000002, 'adminpass2'),
-(30000003, 'adminpass3'),
-(30000004, 'adminpass4'),
-(30000005, 'adminpass5'),
-(30000006, 'adminpass6'),
-(30000007, 'adminpass7');
+(30000001, 'adminpass1');
 ------------------------------------------------------------------------------
 INSERTING DUMMY DATA INTO PATIENTS TABLE:
 
-INSERT INTO patients (name, age, contactNo, user_id) VALUES
+INSERT INTO patients (name, age, contact_no, user_id) VALUES
 ('LucasSmith', 28, 9123456780, 10000001),
 ('OliviaBrown', 34, 9234567891, 10000002),
 ('MasonJones', 40, 9345678902, 10000003),
@@ -55,12 +49,12 @@ INSERT INTO schedule (date, timeslot, doctor_id) VALUES
 -------------------------------------------------------------------------------
 INSERTING DUMMY DATA INTO APPOINTMENTS TABLE:
 
-INSERT INTO appointments (appointment_id, patient_id, doctor_id, user_id, schedule_id, summary, report) VALUES
-(60000001, 40000001, 20000001, 10000001, 50000001, 'Routine check-up for Lucas', 'No significant findings.'),
-(60000002, 40000002, 20000002, 10000002, 50000002, 'Migraine consultation for Olivia', 'Prescribed medication for migraines.'),
-(60000003, 40000003, 20000003, 10000003, 50000003, 'Knee pain assessment for Mason', 'Recommended physiotherapy.'),
-(60000004, 40000004, 20000004, 10000004, 50000004, 'Pediatric check-up for Emma', 'Growth and development within normal range.'),
-(60000005, 40000005, 20000005, 10000005, 50000005, 'Skin rash evaluation for Ava', 'Dermatitis diagnosed, prescribed ointment.'),
-(60000006, 40000006, 20000006, 10000006, 50000006, 'Stomach ache for Sophia', 'Gastritis suspected, advised dietary changes.'),
-(60000007, 40000007, 20000007, 10000007, 50000007, 'Cancer follow-up for Liam', 'Stable condition, follow-up in 3 months.');
+INSERT INTO appointments (patient_id, doctor_id, user_id, schedule_id, summary, report) VALUES
+(1, 20000001, 10000001, 1, 'Routine check-up for Lucas', 'No significant findings.'),
+(2, 20000002, 10000002, 2, 'Migraine consultation for Olivia', 'Prescribed medication for migraines.'),
+(3, 20000003, 10000003, 3, 'Knee pain assessment for Mason', 'Recommended physiotherapy.'),
+(4, 20000004, 10000004, 4, 'Pediatric check-up for Emma', 'Growth and development within normal range.'),
+(5, 20000005, 10000005, 5, 'Skin rash evaluation for Ava', 'Dermatitis diagnosed, prescribed ointment.'),
+(6, 20000006, 10000006, 6, 'Stomach ache for Sophia', 'Gastritis suspected, advised dietary changes.'),
+(7, 20000007, 10000007, 7, 'Cancer follow-up     for Liam', 'Stable condition, follow-up in 3 months.');
 
