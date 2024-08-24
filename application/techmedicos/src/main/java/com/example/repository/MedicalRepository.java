@@ -12,4 +12,6 @@ public interface MedicalRepository {
 //    ArrayList <Appointment> getAppointment(); //Returns all appointments
     ArrayList <Patient> getPatients(); //Returns all Patients
     int getNextId();
+//    ArrayList <> getAllEmployeeIDs();
+    Employee employeeValidation(int id, String password);
 }
