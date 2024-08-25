@@ -1,4 +1,4 @@
-package com.example.service2;
+package com.example.service;
 
 import com.example.exception.AppointmentDoesNotExistException;
 import com.example.models.Appointment;
@@ -10,8 +10,6 @@ import com.example.models.Patient;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.Locale;
 
 public interface MedicalService {
     Employee login(int id, String password);
