@@ -2,6 +2,7 @@ package com.example.service2;
 
 import com.example.exception.AppointmentDoesNotExistException;
 import com.example.models.Appointment;
+import com.example.exception.*;
 import com.example.models.Doctor;
 import com.example.models.Employee;
 import com.example.models.Patient;
@@ -19,8 +20,8 @@ public interface MedicalService {
     void deleteAppointment(int doctorId, int timeSlot, LocalDate date) throws AppointmentDoesNotExistException;
     void deleteAppointmentByID(int appointmentId) throws AppointmentDoesNotExistException;
     ArrayList<Patient> getPatients();
-    boolean registerPatient(int userId, String name, int age, long contactNo);
-    boolean makeAppointment(int userId, int doctorId, int patientId, LocalDate date, int timeSlot, String summary);
+    boolean registerPatient(int userId, String name, int age, long contactNo) throws UserNotFoundException, ServiceException;
+    boolean makeAppointment(int userId, int doctorId, int patientId, LocalDate date, int timeSlot, String summary) throws UserNotFoundException, PatientNotFoundException, DoctorNotFoundException, ServiceException;
     ArrayList<Appointment> getAppointmentsByDate(int doctorId, LocalDate start, LocalDate end);
     void doctorSetSchedule(int doctor_id, LocalDate date, int timeSlot);
     String getReport(int appointment_id);
