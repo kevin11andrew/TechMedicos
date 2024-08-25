@@ -1,12 +1,19 @@
 package com.example;
 
 import com.example.database.MySqlConnectionFactory;
+import com.example.exception.AppointmentDoesNotExistException;
 import com.example.models.Admin;
+import com.example.models.Doctor;
 import com.example.repository.MedicalRepository;
 import com.example.repository.MySqlMedicalRepository;
+import com.example.service2.MedicalService;
+import com.example.service2.MedicalServiceImpl;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Date;
 
 import static com.example.database.MySqlConnectionFactory.getConnection;
 
@@ -21,10 +28,47 @@ public class Application {
 
 
         MedicalRepository medicalRepository = new MySqlMedicalRepository();
+        MedicalService medicalService = new MedicalServiceImpl(medicalRepository);
 //        medicalRepository.getDoctors();
 //        medicalRepository.getUsers();
 //        medicalRepository.getPatients();
-        medicalRepository.getNextId();
-        //
+//        medicalRepository.getNextId();
+
+//      LOGIN:
+        int id =20000007;
+        String pwd="docpass7";
+        System.out.println(medicalService.login(id,pwd)); // Prints the enum of employee type that has logged in, else returns null
+
+//      ---------------------------------------------------------------------------------------------------------------------------
+
+//      UPLOAD XML/JSON FILE OF DOCTORS
+
+//      ---------------------------------------------------------------------------------------------------------------------------
+//      CANCEL APPOINTMENTS:
+//      GET ALL DOCTORS
+//        ArrayList <String> doctors= medicalService.showDoctors();
+//        for (String doctor: doctors){
+//            System.out.println(doctor);
+//        }
+        ArrayList <Doctor> doctors = medicalService.showDoctors();
+        for(Doctor doctor:doctors){
+            System.out.println(doctor);
+        }
+        LocalDate localDate = LocalDate.of(2024,8,20);
+        System.out.println(localDate);
+        try {
+            medicalService.deleteAppointment(20000006,11,localDate);
+        } catch (AppointmentDoesNotExistException e) {
+            e.printStackTrace();
+        }
+        try{
+           medicalService.deleteAppointmentByID(5);
+       } catch (AppointmentDoesNotExistException e) {
+            e.printStackTrace();
+        }
+
+//        String temp=localDate.toString();
+//        System.out.println(temp);
+
     }
 }

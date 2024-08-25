@@ -1,0 +1,60 @@
+INSERTING DUMMY DATA INTO USERS TABLE:
+
+INSERT INTO users (user_id, name, password, contact_no) VALUES
+(10000001, 'JohnDoe', 'password1', 1234567890),
+(10000002, 'JaneSmith', 'password2', 2345678901),
+(10000003, 'MikeBrown', 'password3', 3456789012),
+(10000004, 'EmilyWhite', 'password4', 4567890123),
+(10000005, 'ChrisGreen', 'password5', 5678901234),
+(10000006, 'SaraBlue', 'password6', 6789012345),
+(10000007, 'DavidBlack', 'password7', 7890123456);
+---------------------------------------------------------------------------
+INSERTING DUMMY DATA INTO DOCTORS TABLE:
+
+INSERT INTO doctors (doctor_id, name, password, contact_no, speciality) VALUES
+(20000001, 'AliceCarter', 'docpass1', 9876543210, 'Cardiology'),
+(20000002, 'BobJones', 'docpass2', 8765432109, 'Neurology'),
+(20000003, 'CharlieMiller', 'docpass3', 7654321098, 'Orthopedics'),
+(20000004, 'DianaTaylor', 'docpass4', 6543210987, 'Pediatrics'),
+(20000005, 'EvanDavis', 'docpass5', 5432109876, 'Dermatology'),
+(20000006, 'FionaBrown', 'docpass6', 4321098765, 'Gastroenterology'),
+(20000007, 'GeorgeWilson', 'docpass7', 3210987654, 'Oncology');
+-----------------------------------------------------------------------------
+INSERTING DUMMY DATA INTO ADMINS TABLE:
+
+INSERT INTO admin (admin_id, password) VALUES
+(30000001, 'adminpass1');
+------------------------------------------------------------------------------
+INSERTING DUMMY DATA INTO PATIENTS TABLE:
+
+INSERT INTO patients (name, age, contact_no, user_id) VALUES
+('LucasSmith', 28, 9123456780, 10000001),
+('OliviaBrown', 34, 9234567891, 10000002),
+('MasonJones', 40, 9345678902, 10000003),
+('EmmaGarcia', 25, 9456789013, 10000004),
+('AvaMartinez', 37, 9567890124, 10000005),
+('SophiaDavis', 22, 9678901235, 10000006),
+('LiamWilson', 45, 9789012346, 10000007);
+-------------------------------------------------------------------------------
+INSERTING DUMMY DATA INTO SCHEDULE TABLE:
+
+INSERT INTO schedule (date, timeslot, doctor_id) VALUES
+('2024-08-19', 9, 20000001),
+('2024-08-19', 10, 20000002),
+('2024-08-19', 11, 20000003),
+('2024-08-20', 9, 20000004),
+('2024-08-20', 10, 20000005),
+('2024-08-20', 11, 20000006),
+('2024-08-21', 9, 20000007);
+-------------------------------------------------------------------------------
+INSERTING DUMMY DATA INTO APPOINTMENTS TABLE:
+
+INSERT INTO appointments (patient_id, doctor_id, user_id, schedule_id, summary, report) VALUES
+(1, 20000001, 10000001, 1, 'Routine check-up for Lucas', 'No significant findings.'),
+(2, 20000002, 10000002, 2, 'Migraine consultation for Olivia', 'Prescribed medication for migraines.'),
+(3, 20000003, 10000003, 3, 'Knee pain assessment for Mason', 'Recommended physiotherapy.'),
+(4, 20000004, 10000004, 4, 'Pediatric check-up for Emma', 'Growth and development within normal range.'),
+(5, 20000005, 10000005, 5, 'Skin rash evaluation for Ava', 'Dermatitis diagnosed, prescribed ointment.'),
+(6, 20000006, 10000006, 6, 'Stomach ache for Sophia', 'Gastritis suspected, advised dietary changes.'),
+(7, 20000007, 10000007, 7, 'Cancer follow-up     for Liam', 'Stable condition, follow-up in 3 months.');
+
