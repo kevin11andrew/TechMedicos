@@ -18,5 +18,6 @@ public interface MedicalService {
     void deleteAppointment(int doctorId, int timeSlot, LocalDate date) throws AppointmentDoesNotExistException;
     void deleteAppointmentByID(int appointmentId) throws AppointmentDoesNotExistException;
     ArrayList<Patient> getPatients();
-    public boolean registerPatient(int userId, String name, int age, long contactNo);
+    boolean registerPatient(int userId, String name, int age, long contactNo);
+    boolean makeAppointment(int userId, int doctorId, int patientId, LocalDate date, int timeSlot, String summary);
 }

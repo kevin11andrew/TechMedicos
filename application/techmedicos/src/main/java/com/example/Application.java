@@ -79,5 +79,10 @@ public class Application {
 //      USER SHOULD BE ABLE TO ADD PATIENT
 //      PASS userId and patient details
         medicalService.registerPatient(10000001,"temp",45, 1234567890);
+
+//      ---------------------------------------------------------------------------------------------------------------------------
+//        CREATE APPOINTMENT:
+        localDate = LocalDate.of(2024,8,19);
+        medicalService.makeAppointment(10000001,20000003,1,localDate,10, "HE IS SICK");
     }
 }

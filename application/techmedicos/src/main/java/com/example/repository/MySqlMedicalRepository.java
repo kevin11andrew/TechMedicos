@@ -271,4 +271,77 @@ public class MySqlMedicalRepository implements MedicalRepository {
         return rows !=0;
     }
 
+    @Override
+    public boolean isAvailable(int doctorId, int timeSlot, LocalDate date) {
+        String sql = "SELECT schedule_id FROM schedule WHERE doctor_id = ? AND timeslot = ? AND date= ?;";
+
+        try {
+            connection = MySqlConnectionFactory.getConnection();
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setInt(1,doctorId);
+            statement.setInt(2,timeSlot);
+            statement.setString(3,date.toString());
+            ResultSet resultSet = statement.executeQuery();
+            return !resultSet.next();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            try {
+                connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    @Override
+    public void createAppointment(int userId, int doctorId, int patientId, LocalDate date, int timeSlot, String summary) {
+        String sql = "INSERT INTO schedule (date, timeslot, doctor_id) VALUES (?, ?, ?);";
+        int rows=0;
+        try {
+            connection = MySqlConnectionFactory.getConnection();
+            PreparedStatement statement;
+            statement = connection.prepareStatement(sql);
+            statement.setString(1, date.toString());
+            statement.setInt(2, timeSlot);
+            statement.setInt(3, doctorId);
+            System.out.println(statement);
+            rows = statement.executeUpdate();
+
+            sql = "SELECT schedule_id from schedule where date=? AND timeslot=? AND doctor_id=?;";
+            statement = connection.prepareStatement(sql);
+            statement.setString(1, date.toString());
+            statement.setInt(2, timeSlot);
+            statement.setInt(3, doctorId);
+
+            ResultSet resultSet = statement.executeQuery();
+            resultSet.next();
+            int schedule_id=resultSet.getInt("schedule_id");
+            System.out.println(schedule_id);
+
+            sql = "INSERT INTO appointments (patient_id, doctor_id, user_id, schedule_id, summary) VALUES (?, ?, ?, ?, ?);";
+            statement = connection.prepareStatement(sql);
+            statement.setInt(1, patientId);
+            statement.setInt(2, doctorId);
+            statement.setInt(3, userId);
+            statement.setInt(4,schedule_id);
+            statement.setString(5, summary);
+            rows = statement.executeUpdate();
+            System.out.println(rows);
+
+
+        }catch (SQLIntegrityConstraintViolationException e){
+//            return false;
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+//        return rows !=0;
+    }
 }
