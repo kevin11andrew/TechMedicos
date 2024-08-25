@@ -12,7 +12,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class Application {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws DoctorNotFoundException, ServiceException {
 //        MySqlConnectionFactory mySqlConnectionFactory = new MySqlConnectionFactory();
 //        try {
 //            Connection connection = getConnection();
