@@ -5,7 +5,6 @@ import com.example.models.*;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.List;
 
 public interface MedicalRepository {
     ArrayList <Admin> getAdmins();
@@ -19,4 +18,6 @@ public interface MedicalRepository {
     void deleteAppointment(int doctorId, int timeSlot, LocalDate date) throws AppointmentDoesNotExistException;
     void deleteAppointmentByID(int appointmentId) throws AppointmentDoesNotExistException;
     boolean registerPatient(Patient patient);
+    boolean isAvailable(int doctorId, int timeSlot, LocalDate date);
+    void createAppointment(int userId, int doctorId, int patientId, LocalDate date, int timeSlot, String summary);
 }
