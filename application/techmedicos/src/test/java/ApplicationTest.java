@@ -3,16 +3,16 @@
 import com.example.exception.AppointmentDoesNotExistException;
 import com.example.exception.ServiceException;
 import com.example.exception.UserNotFoundException;
+import com.example.models.Appointment;
 import com.example.models.Doctor;
 import com.example.models.Employee;
 import com.example.models.Patient;
 import com.example.repository.MedicalRepository;
 import com.example.repository.MedicalRepositoryFactory;
-import com.example.service2.MedicalService;
-import com.example.service2.MedicalServiceImpl;
+import com.example.service.MedicalService;
+import com.example.service.MedicalServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -40,32 +40,19 @@ class ApplicationTest {
 
     @Test
     void testShowDoctors() {
-        List<Doctor> doctors = new ArrayList<>();
-        medicalService.doctors.add(new Doctor(1, "Cardiology","John Doe", 7418529630L,"23rwefsdvx"));
-        doctors.add(new Doctor(2,  "Neurology","Jane Doe", 8974561230L, "q2ewadsc"));
-
-        List<Doctor> doctors = medicalService.showDoctors();
-        assertEquals(2, doctors.size());
-        assertEquals("John Doe", doctors.get(0).getName());
-        assertEquals("Jane Doe", doctors.get(1).getName());
-
-        verify(medicalRepository).getDoctors();
+        List<Doctor> doctors =medicalService.showDoctors();
+        assertEquals(8, doctors.size());
     }
 
     @Test
     void testDeleteAppointment() {
-        LocalDate localDate = LocalDate.of(2024, 8, 20);
-
+        LocalDate date = LocalDate.of(2024, 8, 19);
         try {
-            doNothing().when(medicalRepository).deleteAppointment(20000006, 11, localDate);
-        } catch (AppointmentDoesNotExistException e) {
-            throw new RuntimeException(e);
-        }
-
-        assertDoesNotThrow(() -> medicalService.deleteAppointment(20000006, 11, localDate));
-
-        try {
-            verify(medicalRepository).deleteAppointment(20000006, 11, localDate);
+            Appointment appointment=medicalRepository.getAppointmentById(3);
+            assertEquals(3, appointment.getAppointmentId());
+            medicalService.deleteAppointment(20000003, 11, date);
+            appointment=medicalRepository.getAppointmentById(3);
+            assertEquals(null,appointment);
         } catch (AppointmentDoesNotExistException e) {
             throw new RuntimeException(e);
         }
