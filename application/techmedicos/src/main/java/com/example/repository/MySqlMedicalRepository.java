@@ -159,15 +159,16 @@ public class MySqlMedicalRepository implements MedicalRepository {
 
     @Override
     public Admin getAdminById(int id) {
-        Admin admin;
+        Admin admin=null;
         try {
             connection = MySqlConnectionFactory.getConnection();
             String sql = "SELECT * FROM admin WHERE admin_id=?;";
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setInt(1,id);
             ResultSet resultSet = statement.executeQuery();
-            resultSet.next();
-            admin=new Admin(resultSet.getInt("admin_id"), resultSet.getString("password"));
+            if(resultSet.next()) {
+                admin = new Admin(resultSet.getInt("admin_id"), resultSet.getString("password"));
+            }
             System.out.println(admin);
             return admin;
         } catch (SQLException e) {
@@ -183,15 +184,16 @@ public class MySqlMedicalRepository implements MedicalRepository {
 
     @Override
     public Doctor getDoctorById(int id) {
-        Doctor doctor;
+        Doctor doctor=null;
         try {
             connection = MySqlConnectionFactory.getConnection();
             String sql = "SELECT * FROM doctors WHERE doctor_id=?;";
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setInt(1,id);
             ResultSet resultSet = statement.executeQuery();
-            resultSet.next();
-            doctor=new Doctor(resultSet.getInt("doctor_id"), resultSet.getString("speciality"), resultSet.getString("name"),resultSet.getLong("contact_no"),resultSet.getString("password"));
+            if(resultSet.next()) {
+                doctor = new Doctor(resultSet.getInt("doctor_id"), resultSet.getString("speciality"), resultSet.getString("name"), resultSet.getLong("contact_no"), resultSet.getString("password"));
+            }
             System.out.println(doctor);
             return doctor;
         } catch (SQLException e) {
@@ -207,17 +209,68 @@ public class MySqlMedicalRepository implements MedicalRepository {
 
     @Override
     public User getUserById(int id) {
-        User user;
+        User user=null;
         try {
             connection = MySqlConnectionFactory.getConnection();
             String sql = "SELECT * FROM users WHERE user_id=?;";
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setInt(1,id);
             ResultSet resultSet = statement.executeQuery();
-            resultSet.next();
-            user=new User(resultSet.getInt("user_id"), resultSet.getString("name"),resultSet.getLong("contact_no"),resultSet.getString("password"));
+            if(resultSet.next()) {
+                user = new User(resultSet.getInt("user_id"), resultSet.getString("name"), resultSet.getLong("contact_no"), resultSet.getString("password"));
+            }
             System.out.println(user);
             return user;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            try {
+                connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    @Override
+    public Patient getPatientById(int id) {
+        Patient patient=null;
+        try {
+            connection = MySqlConnectionFactory.getConnection();
+            String sql = "SELECT * FROM patients WHERE patient_id=?;";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setInt(1,id);
+            ResultSet resultSet = statement.executeQuery();
+            if(resultSet.next()) {
+                patient = new Patient(resultSet.getInt("user_id"), resultSet.getString("name"), resultSet.getInt("age"), resultSet.getLong("contact_no"));
+            }
+            System.out.println(patient);
+            return patient;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            try {
+                connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    @Override
+    public Appointment getAppointmentById(int id) {
+        Appointment appointment=null;
+        try {
+            connection = MySqlConnectionFactory.getConnection();
+            String sql = "SELECT * FROM appointments WHERE appointment_id=?;";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setInt(1,id);
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                appointment = new Appointment(resultSet.getInt("appointment_id"), resultSet.getInt("doctor_id"), resultSet.getInt("patient_id"), resultSet.getInt("user_id"), resultSet.getInt("schedule_id"), resultSet.getString("summary"), resultSet.getString("report"));
+            }
+            System.out.println(appointment);
+            return appointment;
         } catch (SQLException e) {
             throw new RuntimeException(e);
         } finally {
