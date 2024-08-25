@@ -22,31 +22,31 @@ public class AdminServiceImpl implements AdminService{
         this.medicalRepositoryFactory = medicalRepositoryFactory;
     }
     @Override
-    public void importDoctors(String filePath) throws Exception {
-        //if data is imported from csv file
-        List<Doctor> doctors = new ArrayList<>();
-        try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                String[] parts = line.split(",");
-                if (parts.length == 5) {
-                    Doctor doctor = new Doctor(Integer.parseInt(parts[0]),parts[1],parts[2],Integer.parseInt(parts[3]),parts[4]);
-                    doctors.add(doctor);
-                }
-            }
-        }
-        //if data is imported using json file
-        ObjectMapper objectMapper = new ObjectMapper();
-        File file = new File(filePath);
-
-        // Parse the JSON file into a list of Doctor objects
-        List<Doctor> doctors = objectMapper.readValue(file, new TypeReference<List<Doctor>>() {});
-
-        for (Doctor doctor : doctors) {
-            medicalRepositoryFactory.saveDoctor(doctor);
-        }
-
-    }
+//    public void importDoctors(String filePath) throws Exception {
+//        //if data is imported from csv file
+//        List<Doctor> doctors = new ArrayList<>();
+//        try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
+//            String line;
+//            while ((line = reader.readLine()) != null) {
+//                String[] parts = line.split(",");
+//                if (parts.length == 5) {
+//                    Doctor doctor = new Doctor(Integer.parseInt(parts[0]),parts[1],parts[2],Integer.parseInt(parts[3]),parts[4]);
+//                    doctors.add(doctor);
+//                }
+//            }
+//        }
+//        //if data is imported using json file
+//        ObjectMapper objectMapper = new ObjectMapper();
+//        File file = new File(filePath);
+//
+//        // Parse the JSON file into a list of Doctor objects
+//        List<Doctor> doctors = objectMapper.readValue(file, new TypeReference<List<Doctor>>() {});
+//
+//        for (Doctor doctor : doctors) {
+//            medicalRepositoryFactory.saveDoctor(doctor);
+//        }
+//
+//    }
 
     public void registerDoctor(int id,String name,String speciality,int contact,String password) throws ServiceException {
         try {

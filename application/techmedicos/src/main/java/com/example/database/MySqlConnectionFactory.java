@@ -23,7 +23,11 @@ public class MySqlConnectionFactory {
             throw new RuntimeException(e);
         }
         try {
-            connection=getConnection();
+            String url = properties.getProperty("database.url");
+            String user = properties.getProperty("database.user");
+            String password = properties.getProperty("database.password");
+            connection= DriverManager.getConnection(url, user, password);
+
             PreparedStatement statement;
             ArrayList<String> sql = new ArrayList<>();
             String name=properties.getProperty("database.name");
@@ -65,7 +69,7 @@ public class MySqlConnectionFactory {
     }
 
     public static Connection getConnection() throws SQLException {
-        String url = properties.getProperty("database.url");
+        String url = properties.getProperty("database.url")+properties.getProperty("database.name");
         String user = properties.getProperty("database.user");
         String password = properties.getProperty("database.password");
         System.out.println("'"+url+"' '"+user+"' '"+password+"'");
