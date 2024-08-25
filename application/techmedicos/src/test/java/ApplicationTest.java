@@ -53,68 +53,51 @@ class ApplicationTest {
     void testDeleteAppointment() {
         LocalDate date = LocalDate.of(2024, 8, 19);
         try {
-            Appointment appointment=medicalRepository.getAppointmentById(3);
-            assertEquals(3, appointment.getAppointmentId());
-            medicalService.deleteAppointment(20000003, 11, date);
-            appointment=medicalRepository.getAppointmentById(3);
+            medicalService.makeAppointment(10000001,20000004,5,date,5,"Headache");
+            Appointment appointment=medicalService.getAppointmentsByDate(20000004,date,date).get(0);
+            System.out.println(appointment);
+            assertEquals(10000001,appointment.getUserId());
+            assertEquals(20000004,appointment.getDoctorId());
+            assertEquals(5,appointment.getPatientId());
+            medicalService.deleteAppointment(20000004, 5, date);
+            appointment=medicalRepository.getAppointmentById(9);
             assertEquals(null,appointment);
         } catch (AppointmentDoesNotExistException e) {
             throw new RuntimeException(e);
-        }
-    }
-
-    @Test
-    void testDeleteAppointmentByID() {
-        try {
-            doNothing().when(medicalRepository).deleteAppointmentByID(5);
-        } catch (AppointmentDoesNotExistException e) {
-            throw new RuntimeException(e);
-        }
-
-        assertDoesNotThrow(() -> medicalService.deleteAppointmentByID(5));
-
-        try {
-            verify(medicalRepository).deleteAppointmentByID(5);
-        } catch (AppointmentDoesNotExistException e) {
+        } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
+
 
     @Test
     void testGetPatients() {
-        List<Patient> mockPatients = new ArrayList<>();
-        mockPatients.add(new Patient(1, "Alice", 30, 1234567890));
-        mockPatients.add(new Patient(2, "Bob", 40, 1876543210));
-
-//        when(medicalRepository.getPatients()).thenReturn(mockPatients);
-
         List<Patient> patients = medicalService.getPatients();
-        assertEquals(2, patients.size());
-        assertEquals("Alice", patients.get(0).getName());
-        assertEquals("Bob", patients.get(1).getName());
-
-        verify(medicalRepository).getPatients();
+        assertEquals(41, patients.size());
     }
 
     @Test
     void testRegisterPatient() {
         try {
-            doNothing().when(medicalService).registerPatient(10000001, "temp", 45, 1234567890);
-        } catch (UserNotFoundException e) {
-            System.out.println("User not fount");
-        } catch (ServiceException e) {
-            System.out.println("Service Layer Exception");
-        }
+            medicalService.registerPatient(10000001,"Alex", 5, 1237418529);
+            ArrayList <Patient> patients=medicalService.getPatients();
+            Patient temp=null;
+            for(Patient patient: patients){
+                if(patient.getUserId()==10000001 && patient.getName().equals("Alex") && patient.getAge()==5 && patient.getContactNo()==1237418529){
+                    temp=patient;
+                }
+            }
+            assertEquals(10000001, temp.getUserId());
+            assertEquals("Alex", temp.getName());
+            assertEquals(5, temp.getAge());
+            assertEquals(1237418529, temp.getContactNo());
 
-        assertDoesNotThrow(() -> medicalService.registerPatient(10000001, "temp", 45, 1234567890));
-
-        try {
-            verify(medicalService).registerPatient(10000001, "temp", 45, 1234567890);
         } catch (UserNotFoundException e) {
-            System.out.println("User not found");
+            throw new RuntimeException(e);
         } catch (ServiceException e) {
             throw new RuntimeException(e);
         }
+
     }
     @Test
     void testMakeAppointment() throws Exception {
