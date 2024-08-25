@@ -9,7 +9,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 public interface AdminService {
-    void importDoctors(String filePath) throws Exception;
+    //void importDoctors(String filePath) throws Exception;
     void registerDoctor(int id,String name,String speciality,int contact,String password) throws ServiceException;
     void updateDoctorSchedule(Schedule schedule) throws ServiceException;
     void cancelDoctorAppointment(int appointmentId, LocalDate date,int timeSlot) throws ServiceException;

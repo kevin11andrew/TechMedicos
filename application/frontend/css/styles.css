@@ -1,0 +1,59 @@
+/* styles.css */
+body {
+    background-image: url('/images/img3.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+h2 {
+    color: #030303;
+}
+
+.card-container {
+    min-height: 60vh; /* Adjust the height to center the card */
+}
+
+.admin-card {
+    width: 100%;
+    max-width: 400px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    background-color: #ffffff9b;
+}
+
+.admin-card a {
+    font-size: 18px;
+    font-weight: 500;
+    padding: 15px;
+    border-radius: 5px;
+}
+
+.admin-card a.btn-primary {
+    background-color: #007bff;
+    border: none;
+}
+
+.admin-card a.btn-secondary {
+    background-color: #007bff;
+    border: none;
+}
+
+.admin-card a:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transform: scale(1.05);
+}
+
+.admin-title {
+    display: inline-block;
+    background-color: #f8f9fa99; /* Change this to your desired background color */
+    padding: 10px 20px; /* Add padding around the text */
+    border-radius: 5px; /* Add rounded corners to the background color area */
+    margin: 0; /* Ensure no extra margin around the h2 tag */
+}
+
+.text-center-container {
+    text-align: center;
+    margin: 0 auto; /* Center horizontally */
+}

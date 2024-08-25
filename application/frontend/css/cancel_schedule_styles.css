@@ -1,0 +1,44 @@
+/* cancel_schedule_styles.css */
+body {
+    background-image: url('/images/img3.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+
+h2 {
+    color: #050505;
+}
+
+.schedule-card {
+    max-width: 500px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    background-color: #ded2d289;
+}
+
+.schedule-card .form-label {
+    font-weight: 500;
+}
+
+.schedule-card .btn {
+    font-size: 18px;
+    padding: 10px 15px;
+}
+
+.schedule-card .btn-danger {
+    background-color: #007bff;
+    border: none;
+}
+
+.schedule-card .btn-secondary {
+    background-color: #007bff;
+    border: none;
+}
+
+.schedule-card .btn:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transform: scale(1.05);
+}
