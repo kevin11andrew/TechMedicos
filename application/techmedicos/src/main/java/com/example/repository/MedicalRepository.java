@@ -23,6 +23,7 @@ public interface MedicalRepository {
     Employee employeeValidation(int id, String password);
     void deleteAppointment(int doctorId, int timeSlot, LocalDate date) throws AppointmentDoesNotExistException;
     void deleteAppointmentByID(int appointmentId) throws AppointmentDoesNotExistException;
+    boolean registerDoctor(Doctor doctor);
     boolean registerPatient(Patient patient);
     boolean isAvailable(int doctorId, int timeSlot, LocalDate date);
     void createAppointment(int userId, int doctorId, int patientId, LocalDate date, int timeSlot, String summary);

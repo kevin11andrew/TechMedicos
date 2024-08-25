@@ -26,6 +26,15 @@ public class MedicalServiceImpl implements MedicalService{
         return medicalRepository.employeeValidation(id, password);
     }
 
+    @Override
+    public int registerDoctor(String speciality, String name, long contactNo, String password) {
+        //validation required
+        int doctorId=medicalRepository.getNextId();
+        Doctor doctor = new Doctor(doctorId,speciality,name,contactNo,password);
+        medicalRepository.registerDoctor(doctor);
+        return doctorId;
+    }
+
 //    Should we convert to string array or send it as a list of models???
 
 //    @Override
