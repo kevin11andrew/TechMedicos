@@ -1,4 +1,4 @@
-package com.example.service2;
+package com.example.service;
 
 import com.example.exception.AppointmentDoesNotExistException;
 import com.example.models.Appointment;
@@ -11,13 +11,10 @@ import com.example.repository.MedicalRepository;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileReader;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class MedicalServiceImpl implements MedicalService{
@@ -193,7 +190,7 @@ public class MedicalServiceImpl implements MedicalService{
         List<Doctor> doctors = objectMapper.readValue(file, new TypeReference<List<Doctor>>() {});
 
         for (Doctor doctor : doctors) {
-            medicalRepository.saveDoctor(doctor);
+            medicalRepository.registerDoctor(doctor);
         }
     }
 

@@ -1,26 +1,18 @@
 package com.example;
 
-import com.example.database.MySqlConnectionFactory;
 import com.example.exception.*;
-import com.example.models.Admin;
 import com.example.models.Doctor;
 import com.example.models.Patient;
 import com.example.repository.MedicalRepository;
 import com.example.repository.MedicalRepositoryFactory;
-import com.example.repository.MySqlMedicalRepository;
-import com.example.service2.MedicalService;
-import com.example.service2.MedicalServiceImpl;
+import com.example.service.MedicalService;
+import com.example.service.MedicalServiceImpl;
 
-import java.sql.Connection;
-import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
-
-import static com.example.database.MySqlConnectionFactory.getConnection;
 
 public class Application {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws DoctorNotFoundException, ServiceException {
 //        MySqlConnectionFactory mySqlConnectionFactory = new MySqlConnectionFactory();
 //        try {
 //            Connection connection = getConnection();
@@ -99,6 +91,8 @@ public class Application {
         } catch (DoctorNotFoundException e) {
             System.out.println("Invalid Doctor");;
         } catch (ServiceException e) {
+            throw new RuntimeException(e);
+        } catch (Exception e) {
             throw new RuntimeException(e);
         }
 //      ---------------------------------------------------------------------------------------------------------------------------
