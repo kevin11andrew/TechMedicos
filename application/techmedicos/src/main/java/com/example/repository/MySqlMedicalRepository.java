@@ -158,6 +158,78 @@ public class MySqlMedicalRepository implements MedicalRepository {
     }
 
     @Override
+    public Admin getAdminById(int id) {
+        Admin admin;
+        try {
+            connection = MySqlConnectionFactory.getConnection();
+            String sql = "SELECT * FROM admin WHERE admin_id=?;";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setInt(1,id);
+            ResultSet resultSet = statement.executeQuery();
+            resultSet.next();
+            admin=new Admin(resultSet.getInt("admin_id"), resultSet.getString("password"));
+            System.out.println(admin);
+            return admin;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            try {
+                connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    @Override
+    public Doctor getDoctorById(int id) {
+        Doctor doctor;
+        try {
+            connection = MySqlConnectionFactory.getConnection();
+            String sql = "SELECT * FROM doctors WHERE doctor_id=?;";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setInt(1,id);
+            ResultSet resultSet = statement.executeQuery();
+            resultSet.next();
+            doctor=new Doctor(resultSet.getInt("doctor_id"), resultSet.getString("speciality"), resultSet.getString("name"),resultSet.getLong("contact_no"),resultSet.getString("password"));
+            System.out.println(doctor);
+            return doctor;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            try {
+                connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    @Override
+    public User getUserById(int id) {
+        User user;
+        try {
+            connection = MySqlConnectionFactory.getConnection();
+            String sql = "SELECT * FROM users WHERE user_id=?;";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setInt(1,id);
+            ResultSet resultSet = statement.executeQuery();
+            resultSet.next();
+            user=new User(resultSet.getInt("user_id"), resultSet.getString("name"),resultSet.getLong("contact_no"),resultSet.getString("password"));
+            System.out.println(user);
+            return user;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            try {
+                connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    @Override
     public Employee employeeValidation(int id, String password) {
         String[] sql = {"SELECT password FROM doctors where doctor_id= ?;",
                 "SELECT password FROM users where user_id= ?;",

@@ -64,7 +64,6 @@ public class MedicalServiceImpl implements MedicalService {
     public boolean makeAppointment(int userId, int doctorId, int patientId, LocalDate date, int timeSlot, String summary) {
 //        check if patient exists and timeslot is within 0-16
 //        verify if doctor, user and patient exists
-//        check if doctor is available
 //        if yes, add to schedule and appointment
         boolean isAvailable=medicalRepository.isAvailable(doctorId,timeSlot,date);
         if(isAvailable){
