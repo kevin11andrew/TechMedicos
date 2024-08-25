@@ -25,4 +25,8 @@ public interface MedicalRepository {
     boolean registerPatient(Patient patient);
     boolean isAvailable(int doctorId, int timeSlot, LocalDate date);
     void createAppointment(int userId, int doctorId, int patientId, LocalDate date, int timeSlot, String summary);
+    ArrayList<Appointment> getAppointmentsByDate(int doctorId, LocalDate start, LocalDate end);
+    void doctorSetSchedule(int doctor_id, LocalDate date, int timeSlot); //To reserve a timeslot -> doctor has to add it to schedule.
+    String getReport(int appointment_id);
+    void setReport(int appointment_id, String report);
 }

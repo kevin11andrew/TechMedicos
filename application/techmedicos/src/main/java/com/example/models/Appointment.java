@@ -12,7 +12,7 @@ public class Appointment {
     private String report;
 
     // Constructor
-    public Appointment(int appointmentId, int doctorId, int patientId, int userId, int scheduleId, AppointmentStatus status, String summary, String report) {
+    public Appointment(int appointmentId, int doctorId, int patientId, int userId, int scheduleId, String summary, String report) {
         this.appointmentId = appointmentId;
         this.doctorId = doctorId;
         this.patientId = patientId;
