@@ -416,4 +416,126 @@ public class MySqlMedicalRepository implements MedicalRepository {
         }
 //        return rows !=0;
     }
+
+    @Override
+    public ArrayList<Appointment> getAppointmentsByDate(int doctorId, LocalDate start, LocalDate end) {
+        ArrayList <Appointment> appointments = new ArrayList<>();
+        try {
+            connection = MySqlConnectionFactory.getConnection();
+            String sql ="SELECT appointments.*  FROM appointments,schedule  WHERE appointments.doctor_id=? AND schedule.date BETWEEN ? AND ? AND appointments.schedule_id=schedule.schedule_id;";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setInt(1, doctorId);
+            statement.setString(2, start.toString());
+            statement.setString(3, end.toString());
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                appointments.add(new Appointment(resultSet.getInt("appointment_id"), resultSet.getInt("doctor_id"), resultSet.getInt("patient_id"), resultSet.getInt("user_id"), resultSet.getInt("schedule_id"),resultSet.getString("summary"), resultSet.getString("report")));
+            }
+            System.out.println(appointments);
+            return appointments;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            try {
+                connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    @Override
+    public void doctorSetSchedule(int doctor_id, LocalDate date, int timeSlot) {
+        String sql = "SELECT date, timeslot, doctor_id FROM schedule WHERE date=? AND timeslot=? AND doctor_id=?;";
+
+        int rows=0;
+        try {
+            connection = MySqlConnectionFactory.getConnection();
+
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, date.toString());
+            statement.setInt(2, timeSlot);
+            statement.setInt(3, doctor_id);
+            ResultSet resultSet = statement.executeQuery();
+            if(resultSet.next()){
+                System.out.println("Schedule for this slot already exists!");
+                return;
+            }
+
+            sql = "INSERT INTO schedule (date, timeslot, doctor_id) VALUES (?, ?, ?);";
+            statement = connection.prepareStatement(sql);
+            statement.setString(1, date.toString());
+            statement.setInt(2, timeSlot);
+            statement.setInt(3, doctor_id);
+            System.out.println(statement);
+            rows = statement.executeUpdate();
+            System.out.println(rows);
+        }catch (SQLIntegrityConstraintViolationException e){
+            e.printStackTrace();
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    @Override
+    public String getReport(int appointment_id) {
+        String report="";
+        String sql = "SELECT report FROM appointments WHERE appointment_id=?;";
+        int rows=0;
+        try {
+            connection = MySqlConnectionFactory.getConnection();
+
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setInt(1, appointment_id);
+            ResultSet resultSet = statement.executeQuery();
+            if(resultSet.next()){
+               report=resultSet.getString("report");
+            }
+            return report;
+        }catch (SQLIntegrityConstraintViolationException e){
+            e.printStackTrace();
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return report;
+    }
+
+    @Override
+    public void setReport(int appointment_id, String report) {
+        String sql = "UPDATE appointments SET report = ? WHERE appointment_id=?;";
+        int rows=0;
+        try {
+            connection = MySqlConnectionFactory.getConnection();
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, report);
+            statement.setInt(2, appointment_id);
+            rows = statement.executeUpdate();
+            System.out.println(rows);
+        }catch (SQLIntegrityConstraintViolationException e){
+            e.printStackTrace();
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 }

@@ -1,6 +1,7 @@
 package com.example.service2;
 
 import com.example.exception.AppointmentDoesNotExistException;
+import com.example.models.Appointment;
 import com.example.models.Doctor;
 import com.example.models.Employee;
 import com.example.models.Patient;
@@ -72,6 +73,26 @@ public class MedicalServiceImpl implements MedicalService {
         return false;
 
 
+    }
+
+    @Override
+    public ArrayList<Appointment> getAppointmentsByDate(int doctorId, LocalDate start, LocalDate end) {
+        return medicalRepository.getAppointmentsByDate(doctorId,start,end);
+    }
+
+    @Override
+    public void doctorSetSchedule(int doctor_id, LocalDate date, int timeSlot) {
+        medicalRepository.doctorSetSchedule(doctor_id,date,timeSlot);
+    }
+
+    @Override
+    public String getReport(int appointment_id) {
+        return medicalRepository.getReport(appointment_id);
+    }
+
+    @Override
+    public void setReport(int appointment_id, String report) {
+        medicalRepository.setReport(appointment_id,report);
     }
 
 
