@@ -1,23 +1,15 @@
 package com.example;
 
-import com.example.database.MySqlConnectionFactory;
 import com.example.exception.*;
-import com.example.models.Admin;
 import com.example.models.Doctor;
 import com.example.models.Patient;
 import com.example.repository.MedicalRepository;
 import com.example.repository.MedicalRepositoryFactory;
-import com.example.repository.MySqlMedicalRepository;
-import com.example.service2.MedicalService;
-import com.example.service2.MedicalServiceImpl;
+import com.example.service.MedicalService;
+import com.example.service.MedicalServiceImpl;
 
-import java.sql.Connection;
-import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
-
-import static com.example.database.MySqlConnectionFactory.getConnection;
 
 public class Application {
     public static void main(String[] args) {
@@ -100,6 +92,8 @@ public class Application {
             System.out.println("Invalid Doctor");;
         } catch (ServiceException e) {
             throw new RuntimeException(e);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
 //      ---------------------------------------------------------------------------------------------------------------------------
 
@@ -111,10 +105,22 @@ public class Application {
         System.out.println(medicalRepository.getAppointmentById(0));
 //      ---------------------------------------------------------------------------------------------------------------------------
 //        VIEW APPOINTMENTS
-        System.out.println(medicalService.getAppointmentsByDate(20000003, LocalDate.of(2024,1,1),LocalDate.of(2025,1,1)));
+        try {
+            System.out.println(medicalService.getAppointmentsByDate(20000003, LocalDate.of(2024,1,1),LocalDate.of(2025,1,1)));
+        } catch (DoctorNotFoundException e) {
+            throw new RuntimeException(e);
+        } catch (ServiceException e) {
+            throw new RuntimeException(e);
+        }
 //      ---------------------------------------------------------------------------------------------------------------------------
 //        ADD SCHEDULE
-        medicalService.doctorSetSchedule(20000003,LocalDate.of(2025,1,1),5);
+        try {
+            medicalService.doctorSetSchedule(20000003,LocalDate.of(2025,1,1),5);
+        } catch (DoctorNotFoundException e) {
+            throw new RuntimeException(e);
+        } catch (ServiceException e) {
+            throw new RuntimeException(e);
+        }
 //      --------------------------------------------------------------------------------------------------------------------------
 //        FILE REPORT -> SUBMIT MEDICINES AND MEDICAL TESTS
         System.out.println(medicalService.getReport(3));
