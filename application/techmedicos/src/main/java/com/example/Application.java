@@ -119,5 +119,8 @@ public class Application {
 //        FILE REPORT -> SUBMIT MEDICINES AND MEDICAL TESTS
         System.out.println(medicalService.getReport(3));
         medicalService.setReport(8,"take crocin");
+//      --------------------------------------------------------------------------------------------------------------------------
+//        Register a doctor
+        System.out.println(medicalService.registerDoctor("Surgeon","Vishnu", 9874651320L,"fefjyfwbky2"));
     }
 }
