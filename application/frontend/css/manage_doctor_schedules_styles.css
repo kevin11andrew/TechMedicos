@@ -1,0 +1,52 @@
+/* manage_doctor_schedules_styles.css */
+body {
+    background-image: url('/images/img3.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+h1 {
+    color: #070707;
+    text-align: center;
+}
+
+.schedule-card {
+    max-width: 400px; /* Width of the card */
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #ffffff86;
+    padding: 20px; /* Padding inside the card */
+    margin: 0 auto; /* Center the card horizontally */
+}
+
+.schedule-card .btn {
+    font-size: 16px; /* Adjusted font size */
+    padding: 10px 15px; /* Reduced padding */
+    width: 100%; /* Full width within the card */
+    max-width: 300px; /* Max width of the button */
+    margin: 10px auto; /* Center button and add spacing */
+}
+
+.btn-primary{
+    background-color: #007bff;
+    border:none;
+}
+
+.btn-primary:hover{
+    background-color: #0056b3;
+}
+
+.btn-danger{
+    background-color: #007bff;
+    border:none;
+}
+
+.btn-danger:hover{
+    background-color: #0056b3;
+}
+
+.manage-title{
+    background-color: aliceblue;
+}

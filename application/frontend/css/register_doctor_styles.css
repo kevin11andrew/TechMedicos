@@ -1,0 +1,50 @@
+/* register_doctor_styles.css */
+body {
+    background-image: url('/images/img3.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+h2 {
+    color: #0a0a0a;
+}
+
+.register-card {
+    max-width: 500px; /* Width of the card */
+    margin: 50px auto; /* Center the card horizontally and add top margin */
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #ffffffa2;
+    padding: 20px; /* Padding inside the card */
+}
+
+.register-card .form-label {
+    font-weight: 500;
+}
+
+.register-card .form-control {
+    border-radius: 5px;
+}
+
+.register-card .btn-primary {
+    background-color: #007bff;
+    border: none;
+}
+
+.register-card .btn-primary:hover {
+    background-color: #0056b3;
+}
+
+.register-card .btn {
+    font-size: 18px;
+    padding: 10px 15px;
+}
+
+.register-card {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}

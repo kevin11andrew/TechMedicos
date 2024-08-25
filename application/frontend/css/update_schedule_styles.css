@@ -1,0 +1,36 @@
+body {
+    background-image: url('/images/img3.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+}
+/* Styling for the table within the card */
+.table {
+    margin-bottom: 0;
+}
+
+.card-header {
+    font-weight: bold;
+    text-align: center;
+}
+
+.card-body h2 {
+    margin-bottom: 20px;
+}
+
+.btn {
+    border-radius: 5px;
+}
+
+.update-card{
+    background-color: #ffffff85;
+}
+
+.btn-secondary{
+    background-color: #044cb9;
+    border:none;
+}
+.btn-secondary:hover{
+    background-color:#3e66ea;
+}
