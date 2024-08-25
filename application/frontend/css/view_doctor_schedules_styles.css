@@ -1,0 +1,64 @@
+/* view_doctor_schedules_styles.css */
+body {
+    background-image: url('/images/img3.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+
+h2 {
+    color: #060606;
+}
+
+.schedules-card {
+    max-width: 800px; /* Width of the card */
+    margin: 50px auto; /* Center the card horizontally and add top margin */
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #ffffffb7;
+    padding: 20px; /* Padding inside the card */
+}
+
+.table {
+    margin-bottom: 20px; /* Space below the table */
+}
+
+.table th, .table td {
+    text-align: center; /* Center text in table cells */
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+    background-color: #f2f2f2; /* Alternating row colors */
+}
+
+.btn-secondary {
+    width: 300px; /* Fixed width for the button */
+    margin: 0 auto; /* Center the button horizontally */
+    display: block; /* Block display to center horizontally */
+    background-color: #007bff;
+}
+
+.navbar {
+    margin-bottom: 20px; /* Space below the navbar */
+}
+
+.navbar-brand {
+    font-weight: bold; /* Emphasize the brand name */
+    font-size: 1.5rem; /* Increase font size for better visibility */
+}
+
+.nav-link {
+    font-size: 1rem; /* Adjust font size of the links */
+    margin-left: 10px; /* Space between links */
+}
+
+.navbar-nav .nav-link:hover {
+    color: #ddd; /* Hover color for links */
+}
+
+.navbar-dark .navbar-nav .nav-link {
+    color: #ffffff; /* Text color of links in dark mode */
+}
+
