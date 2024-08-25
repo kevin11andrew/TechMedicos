@@ -1,12 +1,14 @@
 package com.example.repository;
 
 import com.example.database.MySqlConnectionFactory;
+import com.example.exception.AppointmentDoesNotExistException;
 import com.example.models.*;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -183,6 +185,53 @@ public class MySqlMedicalRepository implements MedicalRepository {
             return null;
         }catch (SQLException e) {
             throw new RuntimeException(e);
+        } finally {
+            try {
+                connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    @Override
+    public void deleteAppointment(int doctorId, int timeSlot, LocalDate date)throws AppointmentDoesNotExistException {
+        String sql= "DELETE FROM schedule WHERE date=? AND timeSlot=? AND doctor_id=?;";
+        try {
+            connection = MySqlConnectionFactory.getConnection();
+            PreparedStatement statement;
+            statement = connection.prepareStatement(sql);
+            statement.setString(1,date.toString());
+            statement.setInt(2,timeSlot);
+            statement.setInt(3,doctorId);
+            int rows = statement.executeUpdate();
+            if(rows==0)
+                throw new AppointmentDoesNotExistException("Invalid Appointment Details Provided");
+        }catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    @Override
+    public void deleteAppointmentByID(int appointmentId) throws AppointmentDoesNotExistException{
+        String sql= "DELETE FROM schedule WHERE schedule.schedule_id IN(SELECT schedule_id from appointments where appointment_id=?);";
+        try {
+            connection = MySqlConnectionFactory.getConnection();
+            PreparedStatement statement;
+            statement = connection.prepareStatement(sql);
+            statement.setInt(1,appointmentId);
+            System.out.println(statement);
+            int rows = statement.executeUpdate();
+            if(rows==0)
+                throw new AppointmentDoesNotExistException("Invalid Appointment ID Provided");
+        }catch (SQLException e) {
+            e.printStackTrace();
         } finally {
             try {
                 connection.close();
