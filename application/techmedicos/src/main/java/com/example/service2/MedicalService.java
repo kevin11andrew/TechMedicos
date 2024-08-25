@@ -7,6 +7,7 @@ import com.example.models.Doctor;
 import com.example.models.Employee;
 import com.example.models.Patient;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
@@ -21,9 +22,10 @@ public interface MedicalService {
     void deleteAppointmentByID(int appointmentId) throws AppointmentDoesNotExistException;
     ArrayList<Patient> getPatients();
     boolean registerPatient(int userId, String name, int age, long contactNo) throws UserNotFoundException, ServiceException;
-    boolean makeAppointment(int userId, int doctorId, int patientId, LocalDate date, int timeSlot, String summary) throws UserNotFoundException, PatientNotFoundException, DoctorNotFoundException, ServiceException;
-    ArrayList<Appointment> getAppointmentsByDate(int doctorId, LocalDate start, LocalDate end);
-    void doctorSetSchedule(int doctor_id, LocalDate date, int timeSlot);
+    boolean makeAppointment(int userId, int doctorId, int patientId, LocalDate date, int timeSlot, String summary) throws Exception;
+    ArrayList<Appointment> getAppointmentsByDate(int doctorId, LocalDate start, LocalDate end) throws DoctorNotFoundException, ServiceException;
+    void doctorSetSchedule(int doctor_id, LocalDate date, int timeSlot) throws DoctorNotFoundException, ServiceException;
     String getReport(int appointment_id);
     void setReport(int appointment_id, String report);
+    void importDoctors(String filepath) throws IOException;
 }
