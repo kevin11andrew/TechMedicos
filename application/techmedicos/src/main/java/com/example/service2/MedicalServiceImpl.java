@@ -3,6 +3,7 @@ package com.example.service2;
 import com.example.exception.AppointmentDoesNotExistException;
 import com.example.models.Doctor;
 import com.example.models.Employee;
+import com.example.models.Patient;
 import com.example.repository.MedicalRepository;
 
 import java.time.LocalDate;
@@ -45,6 +46,33 @@ public class MedicalServiceImpl implements MedicalService {
     @Override
     public void deleteAppointmentByID(int appointmentId) throws AppointmentDoesNotExistException{
         medicalRepository.deleteAppointmentByID(appointmentId);
+    }
+
+    @Override
+    public ArrayList<Patient> getPatients(){
+        return medicalRepository.getPatients();
+    }
+
+    @Override
+    public boolean registerPatient(int userId, String name, int age, long contactNo) {
+        //Check if User Exists, verify contact No is 10 digits or throw Exception
+        Patient patient=new Patient(userId, name, age, contactNo);
+        return medicalRepository.registerPatient(patient);
+    }
+
+    @Override
+    public boolean makeAppointment(int userId, int doctorId, int patientId, LocalDate date, int timeSlot, String summary) {
+//        check if patient exists and timeslot is within 0-16
+//        verify if doctor, user and patient exists
+//        check if doctor is available
+//        if yes, add to schedule and appointment
+        boolean isAvailable=medicalRepository.isAvailable(doctorId,timeSlot,date);
+        if(isAvailable){
+            medicalRepository.createAppointment(userId, doctorId, patientId, date, timeSlot, summary);
+        }
+        return false;
+
+
     }
 
 

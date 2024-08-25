@@ -4,6 +4,7 @@ import com.example.database.MySqlConnectionFactory;
 import com.example.exception.AppointmentDoesNotExistException;
 import com.example.models.Admin;
 import com.example.models.Doctor;
+import com.example.models.Patient;
 import com.example.repository.MedicalRepository;
 import com.example.repository.MySqlMedicalRepository;
 import com.example.service2.MedicalService;
@@ -63,12 +64,25 @@ public class Application {
         }
         try{
            medicalService.deleteAppointmentByID(5);
-       } catch (AppointmentDoesNotExistException e) {
+        } catch (AppointmentDoesNotExistException e) {
             e.printStackTrace();
         }
 
-//        String temp=localDate.toString();
-//        System.out.println(temp);
+//      ---------------------------------------------------------------------------------------------------------------------------
+//      GET PATIENT DATA AND ALLOW FILTERS
+        ArrayList<Patient> patients = medicalService.getPatients();
+        for(Patient patient: patients){
+            System.out.println(patient);
+        }
+//      HOW TO ENABLE FILTERS?
+//      ---------------------------------------------------------------------------------------------------------------------------
+//      USER SHOULD BE ABLE TO ADD PATIENT
+//      PASS userId and patient details
+        medicalService.registerPatient(10000001,"temp",45, 1234567890);
 
+//      ---------------------------------------------------------------------------------------------------------------------------
+//        CREATE APPOINTMENT:
+        localDate = LocalDate.of(2024,8,19);
+        medicalService.makeAppointment(10000001,20000003,1,localDate,10, "HE IS SICK");
     }
 }
