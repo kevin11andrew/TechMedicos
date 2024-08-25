@@ -1,11 +1,12 @@
 package com.example;
 
 import com.example.database.MySqlConnectionFactory;
-import com.example.exception.AppointmentDoesNotExistException;
+import com.example.exception.*;
 import com.example.models.Admin;
 import com.example.models.Doctor;
 import com.example.models.Patient;
 import com.example.repository.MedicalRepository;
+import com.example.repository.MedicalRepositoryFactory;
 import com.example.repository.MySqlMedicalRepository;
 import com.example.service2.MedicalService;
 import com.example.service2.MedicalServiceImpl;
@@ -28,7 +29,7 @@ public class Application {
 //        }
 
 
-        MedicalRepository medicalRepository = new MySqlMedicalRepository();
+        MedicalRepository medicalRepository = MedicalRepositoryFactory.getMedicalRepository("mysql");
         MedicalService medicalService = new MedicalServiceImpl(medicalRepository);
 //        medicalRepository.getDoctors();
 //        medicalRepository.getUsers();
@@ -78,18 +79,36 @@ public class Application {
 //      ---------------------------------------------------------------------------------------------------------------------------
 //      USER SHOULD BE ABLE TO ADD PATIENT
 //      PASS userId and patient details
-        medicalService.registerPatient(10000001,"temp",45, 1234567890);
+        try {
+            medicalService.registerPatient(10000001,"temp",45, 1234567890);
+        } catch (UserNotFoundException e) {
+            throw new RuntimeException(e);
+        } catch (ServiceException e) {
+            throw new RuntimeException(e);
+        }
 
 //      ---------------------------------------------------------------------------------------------------------------------------
 //        CREATE APPOINTMENT:
         localDate = LocalDate.of(2024,8,19);
-        medicalService.makeAppointment(10000001,20000003,1,localDate,10, "HE IS SICK");
+        try {
+            medicalService.makeAppointment(10000001,20000003,1,localDate,10, "HE IS SICK");
+        } catch (UserNotFoundException e) {
+            System.out.println("Invalid User");;
+        } catch (PatientNotFoundException e) {
+            System.out.println("Invalid Patient");;
+        } catch (DoctorNotFoundException e) {
+            System.out.println("Invalid Doctor");;
+        } catch (ServiceException e) {
+            throw new RuntimeException(e);
+        }
 //      ---------------------------------------------------------------------------------------------------------------------------
 
 //        GET ADMIN BY ID
         System.out.println(medicalRepository.getAdminById(30000001));
         System.out.println(medicalRepository.getDoctorById(20000006));
         System.out.println(medicalRepository.getUserById(10000006));
+        System.out.println(medicalRepository.getPatientById(1));
+        System.out.println(medicalRepository.getAppointmentById(0));
 //      ---------------------------------------------------------------------------------------------------------------------------
 //        VIEW APPOINTMENTS
         System.out.println(medicalService.getAppointmentsByDate(20000003, LocalDate.of(2024,1,1),LocalDate.of(2025,1,1)));
