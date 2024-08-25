@@ -136,7 +136,7 @@ public class MySqlMedicalRepository implements MedicalRepository {
             }
             Collections.sort(employees);
             int size = employees.size();
-            for (int i = 0; i < size; i++) {
+            for (int i = 1; i < size; i++) {
                 if (employees.get(i) != id) {
 //                    System.out.println(id);
                     return id;
@@ -365,6 +365,33 @@ public class MySqlMedicalRepository implements MedicalRepository {
                 e.printStackTrace();
             }
         }
+    }
+
+    @Override
+    public boolean registerDoctor(Doctor doctor) {
+        String sql = "INSERT INTO doctors (doctor_id, name, password, contact_no, speciality) VALUES (?, ?, ?, ?, ?);";
+        int rows=0;
+        try {
+            connection = MySqlConnectionFactory.getConnection();
+            PreparedStatement statement;
+            statement = connection.prepareStatement(sql);
+            statement.setInt(1, doctor.getDoctorId());
+            statement.setString(2, doctor.getName());
+            statement.setString(3, doctor.getPassword());
+            statement.setLong(4, doctor.getContactNo());
+            statement.setString(5, doctor.getSpeciality());
+            System.out.println(statement);
+            rows = statement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return rows !=0;
     }
 
     @Override

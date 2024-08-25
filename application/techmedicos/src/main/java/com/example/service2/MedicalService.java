@@ -17,6 +17,7 @@ public interface MedicalService {
     Employee login(int id, String password);
     //Save to database - Must Allow user to store file, extract path of that file and load the data in doctor Array and Send it to database.
 //    ArrayList <String> showDoctors();
+    int registerDoctor(String speciality, String name, long contactNo, String password);
     ArrayList <Doctor> showDoctors();
     void deleteAppointment(int doctorId, int timeSlot, LocalDate date) throws AppointmentDoesNotExistException;
     void deleteAppointmentByID(int appointmentId) throws AppointmentDoesNotExistException;

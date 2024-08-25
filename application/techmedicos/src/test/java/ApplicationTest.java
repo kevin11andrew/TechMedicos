@@ -1,9 +1,13 @@
-package com.example;
+//package com.example;
 
 import com.example.exception.AppointmentDoesNotExistException;
+import com.example.exception.ServiceException;
+import com.example.exception.UserNotFoundException;
 import com.example.models.Doctor;
+import com.example.models.Employee;
 import com.example.models.Patient;
 import com.example.repository.MedicalRepository;
+import com.example.repository.MedicalRepositoryFactory;
 import com.example.service2.MedicalService;
 import com.example.service2.MedicalServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
@@ -18,13 +22,12 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 class ApplicationTest {
-
     private MedicalRepository medicalRepository;
     private MedicalService medicalService;
 
     @BeforeEach
     void setUp() {
-        medicalRepository = mock(MedicalRepository.class);
+        medicalRepository = MedicalRepositoryFactory.getMedicalRepository("mysql");
         medicalService = new MedicalServiceImpl(medicalRepository);
     }
 
@@ -32,19 +35,14 @@ class ApplicationTest {
     void testLogin() {
         int id = 20000007;
         String pwd = "docpass7";
-
-        when(medicalRepository.login(id, pwd)).thenReturn("Doctor"); // Assume "Doctor" is returned for successful login
-        assertEquals("Doctor", medicalService.login(id, pwd));
-        verify(medicalRepository).login(id, pwd);
+        assertEquals(Employee.DOCTOR, medicalService.login(id, pwd));
     }
 
     @Test
     void testShowDoctors() {
-        List<Doctor> mockDoctors = new ArrayList<>();
-        mockDoctors.add(new Doctor(1, "John Doe", "Cardiology"));
-        mockDoctors.add(new Doctor(2, "Jane Doe", "Neurology"));
-
-        when(medicalRepository.getDoctors()).thenReturn(mockDoctors);
+        List<Doctor> doctors = new ArrayList<>();
+        medicalService.doctors.add(new Doctor(1, "Cardiology","John Doe", 7418529630L,"23rwefsdvx"));
+        doctors.add(new Doctor(2,  "Neurology","Jane Doe", 8974561230L, "q2ewadsc"));
 
         List<Doctor> doctors = medicalService.showDoctors();
         assertEquals(2, doctors.size());
@@ -58,29 +56,45 @@ class ApplicationTest {
     void testDeleteAppointment() {
         LocalDate localDate = LocalDate.of(2024, 8, 20);
 
-        doNothing().when(medicalRepository).deleteAppointment(20000006, 11, localDate);
+        try {
+            doNothing().when(medicalRepository).deleteAppointment(20000006, 11, localDate);
+        } catch (AppointmentDoesNotExistException e) {
+            throw new RuntimeException(e);
+        }
 
         assertDoesNotThrow(() -> medicalService.deleteAppointment(20000006, 11, localDate));
 
-        verify(medicalRepository).deleteAppointment(20000006, 11, localDate);
+        try {
+            verify(medicalRepository).deleteAppointment(20000006, 11, localDate);
+        } catch (AppointmentDoesNotExistException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Test
     void testDeleteAppointmentByID() {
-        doNothing().when(medicalRepository).deleteAppointmentByID(5);
+        try {
+            doNothing().when(medicalRepository).deleteAppointmentByID(5);
+        } catch (AppointmentDoesNotExistException e) {
+            throw new RuntimeException(e);
+        }
 
         assertDoesNotThrow(() -> medicalService.deleteAppointmentByID(5));
 
-        verify(medicalRepository).deleteAppointmentByID(5);
+        try {
+            verify(medicalRepository).deleteAppointmentByID(5);
+        } catch (AppointmentDoesNotExistException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Test
     void testGetPatients() {
         List<Patient> mockPatients = new ArrayList<>();
         mockPatients.add(new Patient(1, "Alice", 30, 1234567890));
-        mockPatients.add(new Patient(2, "Bob", 40, 9876543210));
+        mockPatients.add(new Patient(2, "Bob", 40, 1876543210));
 
-        when(medicalRepository.getPatients()).thenReturn(mockPatients);
+//        when(medicalRepository.getPatients()).thenReturn(mockPatients);
 
         List<Patient> patients = medicalService.getPatients();
         assertEquals(2, patients.size());
@@ -92,10 +106,22 @@ class ApplicationTest {
 
     @Test
     void testRegisterPatient() {
-        doNothing().when(medicalRepository).registerPatient(10000001, "temp", 45, 1234567890);
+        try {
+            doNothing().when(medicalService).registerPatient(10000001, "temp", 45, 1234567890);
+        } catch (UserNotFoundException e) {
+            System.out.println("User not fount");;
+        } catch (ServiceException e) {
+            System.out.println("Service Layer Exception");
+        }
 
         assertDoesNotThrow(() -> medicalService.registerPatient(10000001, "temp", 45, 1234567890));
 
-        verify(medicalRepository).registerPatient(10000001, "temp", 45, 1234567890);
+        try {
+            verify(medicalService).registerPatient(10000001, "temp", 45, 1234567890);
+        } catch (UserNotFoundException e) {
+            System.out.println("User not found");
+        } catch (ServiceException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
