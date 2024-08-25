@@ -84,5 +84,21 @@ public class Application {
 //        CREATE APPOINTMENT:
         localDate = LocalDate.of(2024,8,19);
         medicalService.makeAppointment(10000001,20000003,1,localDate,10, "HE IS SICK");
+//      ---------------------------------------------------------------------------------------------------------------------------
+
+//        GET ADMIN BY ID
+        System.out.println(medicalRepository.getAdminById(30000001));
+        System.out.println(medicalRepository.getDoctorById(20000006));
+        System.out.println(medicalRepository.getUserById(10000006));
+//      ---------------------------------------------------------------------------------------------------------------------------
+//        VIEW APPOINTMENTS
+        System.out.println(medicalService.getAppointmentsByDate(20000003, LocalDate.of(2024,1,1),LocalDate.of(2025,1,1)));
+//      ---------------------------------------------------------------------------------------------------------------------------
+//        ADD SCHEDULE
+        medicalService.doctorSetSchedule(20000003,LocalDate.of(2025,1,1),5);
+//      --------------------------------------------------------------------------------------------------------------------------
+//        FILE REPORT -> SUBMIT MEDICINES AND MEDICAL TESTS
+        System.out.println(medicalService.getReport(3));
+        medicalService.setReport(8,"take crocin");
     }
 }

@@ -1,5 +1,7 @@
 package com.example.service2;
 
+import com.example.exception.AppointmentDoesNotExistException;
+import com.example.models.Appointment;
 import com.example.exception.*;
 import com.example.models.Doctor;
 import com.example.models.Employee;
@@ -86,7 +88,6 @@ public class MedicalServiceImpl implements MedicalService{
     public boolean makeAppointment(int userId, int doctorId, int patientId, LocalDate date, int timeSlot, String summary) throws UserNotFoundException, PatientNotFoundException, DoctorNotFoundException, ServiceException {
 //        check if patient exists and timeslot is within 0-16
 //        verify if doctor, user and patient exists
-//        check if doctor is available
 //        if yes, add to schedule and appointment
         List<User> users = medicalRepository.getUsers();
         List<Patient> patients = medicalRepository.getPatients();
@@ -122,6 +123,26 @@ public class MedicalServiceImpl implements MedicalService{
         return false;
 
 
+    }
+
+    @Override
+    public ArrayList<Appointment> getAppointmentsByDate(int doctorId, LocalDate start, LocalDate end) {
+        return medicalRepository.getAppointmentsByDate(doctorId,start,end);
+    }
+
+    @Override
+    public void doctorSetSchedule(int doctor_id, LocalDate date, int timeSlot) {
+        medicalRepository.doctorSetSchedule(doctor_id,date,timeSlot);
+    }
+
+    @Override
+    public String getReport(int appointment_id) {
+        return medicalRepository.getReport(appointment_id);
+    }
+
+    @Override
+    public void setReport(int appointment_id, String report) {
+        medicalRepository.setReport(appointment_id,report);
     }
 
 
