@@ -1,0 +1,49 @@
+body {
+    background: url('/images/img1.jpg') no-repeat center center fixed;
+    background-size: cover;
+    color: #fff;
+}
+
+.contact-title {
+    text-align: center;
+    margin-bottom: 20px;
+    color:  #0c0c0c;
+}
+
+.contact-text {
+    font-size: 1.25rem;
+    text-align: center;
+    margin-bottom: 40px;
+    max-width: 800px;
+    margin: 0 auto;
+    color:  #0c0c0c;
+}
+
+.background-overlay {
+    background-color: rgba(244, 236, 236, 0.361); /* White overlay with 70% transparency */
+     padding: 37px 0;
+     flex: 1; /* Allow overlay content to take up the remaining space */
+ }
+
+
+.card {
+    background-color: rgba(255, 255, 255, 0.792);
+}
+
+.card-title {
+    color: #1E2A5E;
+}
+
+.card-text {
+    color: #333;
+}
+
+.btn-primary {
+    background-color: #1E2A5E;
+    border-color: #1E2A5E;
+}
+
+.btn-primary:hover {
+    background-color: #16204a;
+    border-color: #16204a;
+}

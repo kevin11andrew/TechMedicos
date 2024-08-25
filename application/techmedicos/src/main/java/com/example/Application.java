@@ -105,10 +105,22 @@ public class Application {
         System.out.println(medicalRepository.getAppointmentById(0));
 //      ---------------------------------------------------------------------------------------------------------------------------
 //        VIEW APPOINTMENTS
-        System.out.println(medicalService.getAppointmentsByDate(20000003, LocalDate.of(2024,1,1),LocalDate.of(2025,1,1)));
+        try {
+            System.out.println(medicalService.getAppointmentsByDate(20000003, LocalDate.of(2024,1,1),LocalDate.of(2025,1,1)));
+        } catch (DoctorNotFoundException e) {
+            throw new RuntimeException(e);
+        } catch (ServiceException e) {
+            throw new RuntimeException(e);
+        }
 //      ---------------------------------------------------------------------------------------------------------------------------
 //        ADD SCHEDULE
-        medicalService.doctorSetSchedule(20000003,LocalDate.of(2025,1,1),5);
+        try {
+            medicalService.doctorSetSchedule(20000003,LocalDate.of(2025,1,1),5);
+        } catch (DoctorNotFoundException e) {
+            throw new RuntimeException(e);
+        } catch (ServiceException e) {
+            throw new RuntimeException(e);
+        }
 //      --------------------------------------------------------------------------------------------------------------------------
 //        FILE REPORT -> SUBMIT MEDICINES AND MEDICAL TESTS
         System.out.println(medicalService.getReport(3));

@@ -1,0 +1,77 @@
+/* doctor_dashboard_styles.css */
+body {
+    background-image: url('/images/img3.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+h1 {
+    color: #000000;
+}
+
+.dashboard-card {
+    max-width: 600px; /* Width of the card */
+    margin: 50px auto; /* Center the card horizontally and add top margin */
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #ffffff76;
+    padding: 20px; /* Padding inside the card */
+    text-align: center; /* Center text inside the card */
+}
+
+.btn-lg {
+    width: 100%; /* Make buttons full width within the card */
+    max-width: 300px; /* Limit button width */
+    margin: 10px auto; /* Center buttons horizontally and add vertical spacing */
+}
+
+.navbar {
+    margin-bottom: 20px; /* Space below the navbar */
+}
+
+.navbar-brand {
+    font-weight: bold; /* Emphasize the brand name */
+    font-size: 1.5rem; /* Increase font size for better visibility */
+}
+
+.nav-link {
+    font-size: 1rem; /* Adjust font size of the links */
+    margin-left: 10px; /* Space between links */
+}
+
+.navbar-nav .nav-link:hover {
+    color: #ddd; /* Hover color for links */
+}
+
+.navbar-dark .navbar-nav .nav-link {
+    color: #ffffff; /* Text color of links in dark mode */
+}
+
+.btn-primary{
+    background-color: #802FFD;
+    border: none;
+}
+
+.btn-primary:hover{
+    background-color: #5E0FDA;
+}
+
+.btn-secondary{
+    background-color: #802FFD ;
+    border: none;
+}
+
+.btn-secondary:hover{
+    background-color:#5E0FDA;
+}
+
+.btn-success{
+    background-color: #802FFD;
+    border:none;
+}
+
+.btn-success:hover{
+    background-color: #5E0FDA;
+}

@@ -1,0 +1,42 @@
+body {
+    background-image: url('/images/img2.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+.card {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+}
+
+h2 {
+    font-weight: bold;
+    color: #333;
+}
+
+.btn-primary {
+    background-color: #00B4D8;
+    border: none;
+}
+
+.btn-primary:hover {
+    background-color: #023E8A;
+}
+
+.btn-secondary{
+    background-color:#0096C7 ;
+    border: none;
+}
+.btn-secondary:hover {
+    background-color:  #023E8A;
+}
+
+.btn-danger{
+    background-color:#0077B6;
+    border:none;
+}
+.btn-danger:hover{
+    background-color:  #023E8A;
+}
