@@ -8,6 +8,12 @@ public class Patient {
     private long contactNo;
 
     // Constructor
+    public Patient(int userId, String name, int age, long contactNo) {
+        this.userId = userId;
+        this.name = name;
+        this.age = age;
+        this.contactNo = contactNo;
+    }
     public Patient(int userId, int patientId, String name, int age, long contactNo) {
         this.userId = userId;
         this.patientId = patientId;
